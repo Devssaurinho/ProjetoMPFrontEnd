@@ -21,3 +21,20 @@ Para iniciar o projeto, rode:
 ```bash
 npm start
 ```
+Para verificar se o código está de acordo com o padrão de codificação [**Airbnb Style**](https://airbnb.io/javascript/react/), rode:
+
+```bash
+npx eslint src
+```
+
+Para usar o [**React Testing Library**](https://testing-library.com/docs/react-testing-library/example-intro) e o [**Jest**](https://jestjs.io/), primeiro crie um arquivo de teste para testar o componente do React e para executar o teste, rode:
+
+```bash
+npm test
+```
+
+Para documentar o código com o [**JSDoc**](https://jsdoc.app/), documente o código conforme requerido na documentação da ferramenta e rode:
+
+```bash
+npx jsdoc -c jsdoc.config.json
+```

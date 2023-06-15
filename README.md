@@ -38,3 +38,8 @@ Para documentar o código com o [**JSDoc**](https://jsdoc.app/), documente o có
 ```bash
 npx jsdoc -c jsdoc.config.json
 ```
+
+### Outras ferramentas utilizadas neste projeto
+
+[**Tailwind**](https://tailwindui.com/)
+[**React Icons**](https://react-icons.github.io/react-icons/)

@@ -41,7 +41,7 @@ npx jsdoc -c jsdoc.config.json
 
 ### Outras ferramentas utilizadas neste projeto
 
-[**Tailwind**](https://tailwindui.com/)
-[**React Icons**](https://react-icons.github.io/react-icons/)
-[**Headless UI**](https://headlessui.com/)
+[**Tailwind**](https://tailwindui.com/) | 
+[**React Icons**](https://react-icons.github.io/react-icons/) | 
+[**Headless UI**](https://headlessui.com/) | 
 [**Heroicons**](https://heroicons.com/)

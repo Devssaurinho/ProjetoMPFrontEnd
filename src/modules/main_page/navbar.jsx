@@ -5,7 +5,7 @@ import { BsPersonCircle } from 'react-icons/bs';
 import logo from '../../assets/atlax_2.png';
 
 const navigation = [
-  // { name: 'Dashboard', href: '#', current: true },
+  { name: 'Meus matches', href: '#', current: true },
   { name: 'Usuários onlines', href: '#', current: false },
   { name: 'Grupos onlines', href: '#', current: false },
 ];
@@ -95,6 +95,16 @@ function Navbar() {
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Seu perfil
+                          </a>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            href="/"
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          >
+                            Configurações
                           </a>
                         )}
                       </Menu.Item>

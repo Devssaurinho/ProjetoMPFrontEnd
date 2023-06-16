@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@headlessui/react": "^1.7.15",
+    "@heroicons/react": "^1.0.6",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/user-event": "^13.5.0",
     "autoprefixer": "^10.4.14",
@@ -38,6 +40,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "",
     "@testing-library/react": "^14.0.0",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^19.0.4",

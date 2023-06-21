@@ -1,7 +1,7 @@
 import React from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { BellIcon, XIcon, MenuIcon } from '@heroicons/react/solid';
-import { BsPersonCircle } from 'react-icons/bs';
+import { XIcon, MenuIcon } from '@heroicons/react/solid';
+import { IoLogOutSharp, IoPersonSharp } from 'react-icons/io5';
 import logo from '../../assets/atlax_2.png';
 
 const navigation = [
@@ -63,19 +63,11 @@ function Navbar() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="sr-only">Notificações</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
-
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <Menu.Button className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Abra o menu de usuário</span>
-                      <BsPersonCircle className="w-10 h-10 text-blue-500" />
+                      <IoPersonSharp className="w-7 h-7" />
                     </Menu.Button>
                   </div>
                   <Transition
@@ -118,19 +110,17 @@ function Navbar() {
                           </a>
                         )}
                       </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="/"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Sair
-                          </a>
-                        )}
-                      </Menu.Item>
                     </Menu.Items>
                   </Transition>
                 </Menu>
+
+                <button
+                  type="button"
+                  className="text-gray-400 p-2 hover:text-white focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                >
+                  <span className="sr-only">Notificações</span>
+                  <IoLogOutSharp className="h-7 w-7" aria-hidden="true" />
+                </button>
               </div>
             </div>
           </div>

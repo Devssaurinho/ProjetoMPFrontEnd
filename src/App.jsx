@@ -4,6 +4,7 @@ import Navbar from './modules/main_page/navbar';
 import Content from './modules/main_page/content';
 import Footer from './modules/main_page/footer';
 import LoginForm from './modules/login/form';
+import CadastroForm from './modules/cadastro/form';
 
 function Home() {
   return (
@@ -23,12 +24,21 @@ function Login() {
   );
 }
 
+function Cadastro() {
+  return (
+    <div>
+      <CadastroForm />
+    </div>
+  );
+}
+
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/cadastro" element={<Cadastro />} />
       </Routes>
     </Router>
   );

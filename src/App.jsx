@@ -5,6 +5,7 @@ import Content from './modules/main_page/content';
 import Footer from './modules/main_page/footer';
 import LoginForm from './modules/login/form';
 import CadastroForm from './modules/cadastro/form';
+import AlterarSenhaForm from './modules/senha/form';
 
 function Home() {
   return (
@@ -32,6 +33,14 @@ function Cadastro() {
   );
 }
 
+function AlterarSenha() {
+  return (
+    <div>
+      <AlterarSenhaForm />
+    </div>
+  );
+}
+
 function App() {
   return (
     <Router>
@@ -39,6 +48,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/senha" element={<AlterarSenha />} />
       </Routes>
     </Router>
   );

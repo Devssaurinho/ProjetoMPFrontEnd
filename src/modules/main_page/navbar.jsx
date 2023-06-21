@@ -2,7 +2,7 @@ import React from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { XIcon, MenuIcon } from '@heroicons/react/solid';
 import { IoLogOutSharp, IoPersonSharp } from 'react-icons/io5';
-import logo from '../../assets/atlax_2.png';
+import logo from '../../assets/atlax.png';
 
 const navigation = [
   { name: 'Meus matches', href: '#', current: true },

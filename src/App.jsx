@@ -7,6 +7,7 @@ import LoginForm from './modules/login/form';
 import CadastroForm from './modules/cadastro/form';
 import AlterarSenhaForm from './modules/senha/form';
 import Painel from './modules/admin/painel';
+import PreferenciasForm from './modules/preferencias/preferencias';
 
 function Home() {
   return (
@@ -50,6 +51,15 @@ function Admin() {
   );
 }
 
+function Preferencias() {
+  return (
+    <div>
+      <Navbar />
+      <PreferenciasForm />
+    </div>
+  );
+}
+
 function App() {
   return (
     <Router>
@@ -59,6 +69,7 @@ function App() {
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/senha" element={<AlterarSenha />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/preferencias" element={<Preferencias />} />
       </Routes>
     </Router>
   );

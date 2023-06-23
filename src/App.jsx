@@ -8,6 +8,7 @@ import CadastroForm from './modules/cadastro/form';
 import AlterarSenhaForm from './modules/senha/form';
 import Painel from './modules/admin/painel';
 import PreferenciasForm from './modules/preferencias/preferencias';
+import MatchesForm from './modules/matches/matches';
 
 function Home() {
   return (
@@ -60,6 +61,15 @@ function Preferencias() {
   );
 }
 
+function Matches() {
+  return (
+    <div>
+      <Navbar />
+      <MatchesForm />
+    </div>
+  );
+}
+
 function App() {
   return (
     <Router>
@@ -70,6 +80,7 @@ function App() {
         <Route path="/senha" element={<AlterarSenha />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/preferencias" element={<Preferencias />} />
+        <Route path="/matches" element={<Matches />} />
       </Routes>
     </Router>
   );

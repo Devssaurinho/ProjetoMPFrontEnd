@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function PreferenciasForm() {
+export default function MatchesForm() {
   return (
     <div>Manutenção!!</div>
   );

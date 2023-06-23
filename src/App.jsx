@@ -6,6 +6,7 @@ import Footer from './modules/main_page/footer';
 import LoginForm from './modules/login/form';
 import CadastroForm from './modules/cadastro/form';
 import AlterarSenhaForm from './modules/senha/form';
+import Painel from './modules/admin/painel';
 
 function Home() {
   return (
@@ -41,6 +42,14 @@ function AlterarSenha() {
   );
 }
 
+function Admin() {
+  return (
+    <div>
+      <Painel />
+    </div>
+  );
+}
+
 function App() {
   return (
     <Router>
@@ -49,6 +58,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/senha" element={<AlterarSenha />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </Router>
   );

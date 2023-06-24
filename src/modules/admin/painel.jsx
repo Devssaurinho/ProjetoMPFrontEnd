@@ -36,17 +36,16 @@ export default function Painel() {
                         />
                         <em className="text-white">Pressione o enter para adicionar a nova preferência</em>
                       </div>
-                      <div className="px-3 flex gap-x-2">
-                        <button
-                          type="button"
-                          className="px-3 py-1.5 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                        >
-                          Salvar
-                        </button>
-                      </div>
+                    </div>
+                    <div className="mt-3 flex gap-x-2">
+                      <button
+                        type="button"
+                        className="px-3 py-1.5 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      >
+                        Salvar
+                      </button>
                     </div>
                   </div>
-
                 </div>
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <div className="col-span-full">

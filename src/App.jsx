@@ -6,6 +6,7 @@ import Footer from './modules/main_page/footer';
 import LoginForm from './modules/login/form';
 import CadastroForm from './modules/cadastro/form';
 import AlterarSenhaForm from './modules/senha/form';
+import Meus from './modules/meus_matches/meus_matches';
 
 function Home() {
   return (
@@ -13,6 +14,15 @@ function Home() {
       <Navbar />
       <Content />
       <Footer />
+    </div>
+  );
+}
+
+function MeusMatches() {
+  return (
+    <div>
+      <Navbar />
+      <Meus />
     </div>
   );
 }
@@ -49,6 +59,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/senha" element={<AlterarSenha />} />
+        <Route path="/Meus" element={<MeusMatches />} />
       </Routes>
     </Router>
   );

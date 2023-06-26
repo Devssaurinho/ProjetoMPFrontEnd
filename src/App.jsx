@@ -75,6 +75,7 @@ function Matches() {
   return (
     <div>
       <Navbar />
+      <h1>Minha Aplicação de Preferências</h1>
       <MatchesForm />
     </div>
   );

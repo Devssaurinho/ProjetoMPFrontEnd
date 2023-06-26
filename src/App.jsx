@@ -6,6 +6,9 @@ import Footer from './modules/main_page/footer';
 import LoginForm from './modules/login/form';
 import CadastroForm from './modules/cadastro/form';
 import AlterarSenhaForm from './modules/senha/form';
+import Painel from './modules/admin/painel';
+import PreferenciasForm from './modules/preferencias/preferencias';
+import MatchesForm from './modules/matches/matches';
 import Meus from './modules/meus_matches/meus_matches';
 
 function Home() {
@@ -51,6 +54,32 @@ function AlterarSenha() {
   );
 }
 
+function Admin() {
+  return (
+    <div>
+      <Painel />
+    </div>
+  );
+}
+
+function Preferencias() {
+  return (
+    <div>
+      <Navbar />
+      <PreferenciasForm />
+    </div>
+  );
+}
+
+function Matches() {
+  return (
+    <div>
+      <Navbar />
+      <MatchesForm />
+    </div>
+  );
+}
+
 function App() {
   return (
     <Router>
@@ -59,7 +88,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/senha" element={<AlterarSenha />} />
-        <Route path="/Meus" element={<MeusMatches />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/preferencias" element={<Preferencias />} />
+        <Route path="/matches" element={<Matches />} />
+        <Route path="/meus" element={<MeusMatches />} />
+
       </Routes>
     </Router>
   );

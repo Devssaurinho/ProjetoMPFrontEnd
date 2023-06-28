@@ -9,6 +9,16 @@ import AlterarSenhaForm from './modules/senha/form';
 import Painel from './modules/admin/painel';
 import PreferenciasForm from './modules/preferencias/preferencias';
 import MatchesForm from './modules/matches/matches';
+import Chat from './modules/chat/chat';
+
+function Chatm() {
+  return (
+    <div>
+      <Navbar />
+      <Chat />
+    </div>
+  );
+}
 
 function Home() {
   return (
@@ -65,6 +75,7 @@ function Matches() {
   return (
     <div>
       <Navbar />
+      <h1>Minha Aplicação de Preferências</h1>
       <MatchesForm />
     </div>
   );
@@ -81,6 +92,7 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/preferencias" element={<Preferencias />} />
         <Route path="/matches" element={<Matches />} />
+        <Route path="/chat" element={<Chatm />} />
       </Routes>
     </Router>
   );

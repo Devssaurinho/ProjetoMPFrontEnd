@@ -15,6 +15,11 @@ function classNames(...classes) {
 }
 
 function Navbar() {
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -117,8 +122,9 @@ function Navbar() {
                 <button
                   type="button"
                   className="text-gray-400 p-2 hover:text-white focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  onClick={handleLogout}
                 >
-                  <span className="sr-only">Notificações</span>
+                  <span className="sr-only">Sair</span>
                   <IoLogOutSharp className="h-7 w-7" aria-hidden="true" />
                 </button>
               </div>

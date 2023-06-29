@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../../assets/atlax.png';
 
@@ -10,7 +9,6 @@ export default function Login() {
   const [senha, setSenha] = useState('');
   const [usernameError, setUsernameError] = useState('');
   const [senhaError, setSenhaError] = useState('');
-  const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -56,7 +54,8 @@ export default function Login() {
       });
 
       if (response.status === 200) {
-        navigate('/'); // Redirect to the home page
+        localStorage.setItem('responseData', JSON.stringify(response.data));
+        window.location.reload(); // Recarrega a página para atualizar o estado de autenticação
       } else if (response.status === 403) {
         setSenhaError('Senha inválida');
       } else if (response.status === 422) {

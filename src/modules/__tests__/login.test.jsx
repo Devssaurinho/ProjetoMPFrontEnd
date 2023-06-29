@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Login from '../login/form.jsx';
 
@@ -9,8 +8,8 @@ jest.mock('react-router-dom', () => ({
   useNavigate: jest.fn(),
 }));
 
-describe('Login component', () => {
-  test('should display error messages for invalid inputs', async () => {
+describe('Login module', () => {
+  test('Deve mostrar mensagens de erro para entradas inválidas obrigatórias', async () => {
     render(<Login />);
     
     fireEvent.click(screen.getByRole('button', { name: 'Entrar' }));
@@ -21,7 +20,7 @@ describe('Login component', () => {
     });
   });
 
-  test('should display error messages for invalid username and password', async () => {
+  test('Deve retornar mensagens de erro para usuários e senhas inválidas', async () => {
     axios.post.mockRejectedValueOnce({ response: { status: 403 } });
 
     render(<Login />);
@@ -36,15 +35,26 @@ describe('Login component', () => {
     });
   });
 
-  test('should redirect to home page for successful login', async () => {
+  test('Página deve recarregar se o login for concluído com sucesso', async () => {
+    // Simula a função reload() do window.location
+    const reloadMock = jest.fn();
+    const windowLocationOriginal = window.location;
+    delete window.location;
+    window.location = { reload: reloadMock };
+  
     axios.post.mockResolvedValueOnce({ status: 200 });
-    useNavigate.mockReturnValue(jest.fn());
-
+  
     render(<Login />);
     
     fireEvent.change(screen.getByLabelText('Usuário'), { target: { value: 'username' } });
     fireEvent.change(screen.getByLabelText('Senha'), { target: { value: '123456' } });
     fireEvent.click(screen.getByRole('button', { name: 'Entrar' }));
-
-  });
+  
+    await waitFor(() => {
+      expect(reloadMock).toHaveBeenCalled();
+    });
+  
+    // Restaura o objeto window.location original
+    window.location = windowLocationOriginal;
+  });  
 });

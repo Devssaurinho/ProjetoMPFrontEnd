@@ -9,8 +9,9 @@ import AlterarSenhaForm from './modules/senha/form';
 import Painel from './modules/admin/painel';
 import PreferenciasForm from './modules/preferencias/preferencias';
 import MatchesForm from './modules/matches/matches';
-import Chat from './modules/chat/chat';
 import ProtectedRoutes from './services/ProtectedRoutes';
+import Chat from './modules/chat/chat';
+import Meus from './modules/meus_matches/meus_matches';
 
 function Chatm() {
   return (
@@ -27,6 +28,15 @@ function Home() {
       <Navbar />
       <Content />
       <Footer />
+    </div>
+  );
+}
+
+function MeusMatches() {
+  return (
+    <div>
+      <Navbar />
+      <Meus />
     </div>
   );
 }
@@ -76,7 +86,6 @@ function Matches() {
   return (
     <div>
       <Navbar />
-      <h1>Minha Aplicação de Preferências</h1>
       <MatchesForm />
     </div>
   );
@@ -95,10 +104,10 @@ function App() {
           <Route path="/preferencias" element={<Preferencias />} />
           <Route path="/matches" element={<Matches />} />
           <Route path="/chat" element={<Chatm />} />
+          <Route path="/meus" element={<MeusMatches />} />
         </Route>
       </Routes>
     </Router>
   );
 }
-
 export default App;

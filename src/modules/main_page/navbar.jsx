@@ -5,7 +5,7 @@ import { IoLogOutSharp, IoPersonSharp } from 'react-icons/io5';
 import logo from '../../assets/atlax.png';
 
 const navigation = [
-  { name: 'Meus matches', href: '#', current: true },
+  { name: 'Meus matches', href: '/meus', current: true },
   { name: 'Usuários onlines', href: '#', current: false },
   { name: 'Grupos onlines', href: '#', current: false },
 ];

@@ -4,8 +4,8 @@ import PrefCheckBox from './prefcheckbox';
 export default function PreferenciasForm() {
   const [preferences, setPreferences] = useState([]);
 
-  const fetchPreferences = () => {
-    fetch('http://localhost:8000/Preferencias/lista-preferencias')
+  const fetchPreferences = async () => {
+    await fetch('http://localhost:8000/Preferencias/lista-preferencias')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Erro ao obter as preferências');
@@ -40,7 +40,7 @@ export default function PreferenciasForm() {
               Selecione Preferências:
             </h2>
             {preferences.map((preference) => (
-              <PrefCheckBox key={preference.id} name={preference.name} />
+              <PrefCheckBox name={preference} />
             ))}
             <div className="mt-3 flex gap-x-2">
               <button

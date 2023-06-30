@@ -9,7 +9,18 @@ import AlterarSenhaForm from './modules/senha/form';
 import Painel from './modules/admin/painel';
 import PreferenciasForm from './modules/preferencias/preferencias';
 import MatchesForm from './modules/matches/matches';
+import ProtectedRoutes from './services/ProtectedRoutes';
+import Chat from './modules/chat/chat';
 import Meus from './modules/meus_matches/meus_matches';
+
+function Chatm() {
+  return (
+    <div>
+      <Navbar />
+      <Chat />
+    </div>
+  );
+}
 
 function Home() {
   return (
@@ -84,18 +95,19 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/senha" element={<AlterarSenha />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/preferencias" element={<Preferencias />} />
-        <Route path="/matches" element={<Matches />} />
-        <Route path="/meus" element={<MeusMatches />} />
-
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/preferencias" element={<Preferencias />} />
+          <Route path="/matches" element={<Matches />} />
+          <Route path="/chat" element={<Chatm />} />
+          <Route path="/meus" element={<MeusMatches />} />
+        </Route>
       </Routes>
     </Router>
   );
 }
-
 export default App;

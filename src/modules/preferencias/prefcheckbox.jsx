@@ -1,6 +1,7 @@
-import { React, useState } from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-export default function PrefCheckBox(props) {
+export default function PrefCheckBox({ name }) {
   const [isChecked, setChecked] = useState(false);
   return (
     <div>
@@ -11,8 +12,12 @@ export default function PrefCheckBox(props) {
         style={{ width: '17px', height: '17px' }}
       />
       <label style={{ color: 'white' }} htmlFor="livroCheckbox">
-        {props.name}
+        {name}
       </label>
     </div>
   );
 }
+
+PrefCheckBox.propTypes = {
+  name: PropTypes.string.isRequired,
+};

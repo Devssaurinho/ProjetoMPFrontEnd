@@ -38,12 +38,12 @@ export default function Painel() {
     <div className="min-h-screen flex items-center justify-center bg-gray-800">
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
-          <div className="relative mt-16 h-80 lg:mt-1">
+          <div className="relative mt-16 h-auto lg:mt-1">
             <img
-              className="relative left-50 right-20 w-[30rem] max-w-none"
+              className="relative mt-16 h-auto lg:mt-1 flex items-center justify-center"
               src={equipe}
               alt="Boy"
-              width={1824}
+              width={500}
               height={1080}
             />
           </div>

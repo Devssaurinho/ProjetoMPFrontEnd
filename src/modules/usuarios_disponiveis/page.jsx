@@ -38,13 +38,13 @@ export default function Painel() {
     <div className="min-h-screen flex items-center justify-center bg-gray-800">
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
-          <div className="relative mt-16 h-80 lg:mt-1">
+          <div className="relative mt-16 h-auto lg:mt-1">
             <img
-              className="relative left-50 right-20 top-60 w-[30rem] max-w-none"
+              className="relative mt-16 h-auto lg:mt-1 flex items-center justify-center"
               src={boy}
               alt="Boy"
-              width={1824}
-              height={1080}
+              width={850}
+              height={1500}
             />
           </div>
           <form className="m-10">
@@ -100,7 +100,6 @@ export default function Painel() {
 
             <div className="mt-6 flex items-center justify-end gap-x-6">
               <a
-                type="link"
                 href="/"
                 className="rounded-md bg-[#4e42ac] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >

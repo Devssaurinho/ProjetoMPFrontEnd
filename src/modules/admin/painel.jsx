@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import TagsInput from 'react-tagsinput';
+import { saveAs } from 'file-saver';
 import axios from 'axios';
 import 'react-tagsinput/react-tagsinput.css';
 
@@ -7,6 +8,24 @@ export default function Painel() {
   const [selected, setSelected] = useState([]);
   const [atualizaSucesso, setAtualizaSucesso] = useState('');
   const [atualizaError, setAtualizaError] = useState('');
+
+  const gerarRelatorio = () => {
+    const localStorageData = localStorage.getItem('responseData');
+    const responseData = localStorageData ? JSON.parse(localStorageData) : null;
+    const idUsuario = responseData?.id;
+    const url = `http://localhost:8000/relatorio/${idUsuario}`;
+
+    axios.get(url, { responseType: 'blob' }) // Define a responseType como 'blob'
+      .then((response) => {
+        const relatorioTxt = new Blob([response.data], { type: 'text/plain' });
+
+        // Utiliza a função saveAs do file-saver para fazer o download
+        saveAs(relatorioTxt, 'relatorio.txt');
+      })
+      .catch((error) => {
+        setAtualizaError(error);
+      });
+  };
 
   useEffect(() => {
     axios
@@ -78,6 +97,7 @@ export default function Painel() {
                       <button
                         type="button"
                         className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                        onClick={gerarRelatorio}
                       >
                         Clique aqui
                       </button>

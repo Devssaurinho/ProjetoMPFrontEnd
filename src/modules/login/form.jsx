@@ -64,6 +64,16 @@ export default function Login() {
       } else {
         setUsernameError('Ocorreu um erro');
       }
+      if (response.status === 200) {
+        localStorage.setItem('responseData', JSON.stringify(response.data));
+        // Pass the username to the PreferenciasForm component
+        const userData = {
+          username,
+          senha: passwordInt,
+        };
+        localStorage.setItem('userData', JSON.stringify(userData));
+        window.location.reload(); // Recarrega a página para atualizar o estado de autenticação
+      }
     } catch (error) {
       if (error.response && error.response.data && error.response.data.detail) {
         setUsernameError(error.response.data.detail.message || 'Ocorreu um erro');

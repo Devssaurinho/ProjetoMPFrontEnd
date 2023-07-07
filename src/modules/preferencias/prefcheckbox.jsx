@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function PrefCheckBox({ name }) {
+export default function PrefCheckBox({ name, onChange }) {
   const [isChecked, setChecked] = useState(false);
+
+  const handleOnChange = () => {
+    setChecked((current) => !current);
+    onChange(); // Call the onChange callback passed from the parent component
+  };
+
   return (
     <div>
       <input
         type="checkbox"
-        value={isChecked}
-        onChange={() => setChecked((current) => !current)}
+        checked={isChecked}
+        onChange={handleOnChange}
         style={{ width: '17px', height: '17px' }}
       />
       <label style={{ color: 'white' }} htmlFor="livroCheckbox">
@@ -20,4 +26,5 @@ export default function PrefCheckBox({ name }) {
 
 PrefCheckBox.propTypes = {
   name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired, // Add the onChange prop type
 };

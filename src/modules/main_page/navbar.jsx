@@ -76,7 +76,7 @@ function Navbar() {
                   <div>
                     <Menu.Button className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Abra o menu de usuário</span>
-                      <IoPersonSharp className="w-7 h-7" />
+                      <IoPersonSharp className="w-6 h-6" />
                     </Menu.Button>
                   </div>
                   <Transition
@@ -129,7 +129,7 @@ function Navbar() {
                   onClick={handleLogout}
                 >
                   <span className="sr-only">Sair</span>
-                  <IoLogOutSharp className="h-7 w-7" aria-hidden="true" />
+                  <IoLogOutSharp className="h-6 w-6" aria-hidden="true" />
                 </button>
               </div>
             </div>

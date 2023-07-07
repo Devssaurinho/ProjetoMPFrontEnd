@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import logo from '../../assets/atlax.png';
+import joker from '../../assets/joker.png';
 
 const serverUrl = 'http://localhost:8000/';
 
@@ -94,6 +95,17 @@ export default function Cadastro() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-800">
+      <div className="relative mt-16 h-auto lg:mt-1 flex justify-end">
+        <div className="pl-80 max-w-full max-h-full">
+          <img
+            className="block mx-auto"
+            src={joker}
+            alt="App screenshot"
+            width={500}
+            height={1080}
+          />
+        </div>
+      </div>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -102,7 +114,7 @@ export default function Cadastro() {
             alt="Atlax Logo"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-[#53a9f6]">
-            Crie sua conta!
+            Crie sua conta
           </h2>
         </div>
 

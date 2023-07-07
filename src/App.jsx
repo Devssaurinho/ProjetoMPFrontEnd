@@ -121,6 +121,10 @@ function Grupos() {
 }
 
 function App() {
+  const localStorageData = localStorage.getItem('responseData');
+  const responseData = localStorageData ? JSON.parse(localStorageData) : null;
+  const isAdmin = responseData?.admin === 1;
+
   return (
     <Router>
       <Routes>
@@ -129,7 +133,7 @@ function App() {
         <Route path="/senha" element={<AlterarSenha />} />
         <Route element={<ProtectedRoutes />}>
           <Route path="/" element={<Home />} />
-          <Route path="/admin" element={<Admin />} />
+          {isAdmin && <Route path="/admin" element={<Admin />} />}
           <Route path="/preferencias" element={<Preferencias />} />
           <Route path="/matches" element={<Matches />} />
           <Route path="/chat" element={<Chatm />} />

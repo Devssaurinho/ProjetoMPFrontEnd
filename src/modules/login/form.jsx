@@ -105,12 +105,12 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-800">
-      <div className="relative mt-16 h-80 lg:mt-1">
+      <div className="pl-80 relative mt-16 h-auto lg:mt-1 flex items-center justify-center">
         <img
-          className="absolute left-10 right-10 top-10 w-[21rem] max-w-none"
+          className="max-w-full max-h-full"
           src={ann}
           alt="App screenshot"
-          width={1824}
+          width={600}
           height={1080}
         />
       </div>

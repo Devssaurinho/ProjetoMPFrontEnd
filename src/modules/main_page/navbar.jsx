@@ -16,11 +16,18 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
+const useAdmin = () => {
+  const responseData = JSON.parse(localStorage.getItem('responseData'));
+  return responseData && responseData.admin === 1;
+};
+
 function Navbar() {
   const handleLogout = () => {
     localStorage.clear();
     window.location.reload();
   };
+
+  const isAdmin = useAdmin();
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -99,16 +106,18 @@ function Navbar() {
                           </a>
                         )}
                       </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="/admin"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Configurações
-                          </a>
-                        )}
-                      </Menu.Item>
+                      {isAdmin && (
+                        <Menu.Item>
+                          {({ active }) => (
+                            <a
+                              href="/admin"
+                              className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            >
+                              Configurações
+                            </a>
+                          )}
+                        </Menu.Item>
+                      )}
                       <Menu.Item>
                         {({ active }) => (
                           <a

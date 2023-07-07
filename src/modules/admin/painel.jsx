@@ -12,7 +12,7 @@ export default function Painel() {
     axios
       .get('http://localhost:8000/Preferencias/lista-preferencias')
       .then((response) => {
-        const preferencesData = response.data.preferencias.map((preference) => preference);
+        const preferencesData = response.data || [];
         setSelected(preferencesData);
       })
       .catch((error) => {
@@ -27,7 +27,7 @@ export default function Painel() {
         setAtualizaSucesso(response.data); // Resposta da API em caso de sucesso
       })
       .catch((error) => {
-        setAtualizaError(error); // Trate qualquer erro de requisição
+        setAtualizaError(error); // Trata qualquer erro de requisição
       });
   };
 

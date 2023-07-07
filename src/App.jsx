@@ -12,9 +12,18 @@ import MatchesForm from './modules/matches/matches';
 import ProtectedRoutes from './services/ProtectedRoutes';
 import Chat from './modules/chat/chat';
 import Meus from './modules/meus_matches/meus_matches';
+import Perfil from './modules/perfil/perfil';
 import UsuariosDisponiveis from './modules/usuarios_disponiveis/page';
 import GruposDisponiveis from './modules/grupos_disponiveis/page';
 
+function Profile() {
+  return (
+    <div>
+      <Navbar />
+      <Perfil />
+    </div>
+  );
+}
 function Chatm() {
   return (
     <div>
@@ -125,6 +134,7 @@ function App() {
           <Route path="/matches" element={<Matches />} />
           <Route path="/chat" element={<Chatm />} />
           <Route path="/meus" element={<MeusMatches />} />
+          <Route path="/perfil" element={<Profile />} />
           <Route path="/usuarios" element={<Usuarios />} />
           <Route path="/grupos" element={<Grupos />} />
         </Route>

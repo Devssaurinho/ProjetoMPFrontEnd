@@ -55,6 +55,7 @@ export default function Login() {
 
       if (response.status === 200) {
         localStorage.setItem('responseData', JSON.stringify(response.data));
+        localStorage.setItem('username', username);
         window.location.reload(); // Recarrega a página para atualizar o estado de autenticação
       } else if (response.status === 403) {
         setSenhaError('Senha inválida');

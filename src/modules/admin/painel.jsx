@@ -1,8 +1,35 @@
-import React, { useState } from 'react';
-import { TagsInput } from 'react-tag-input-component';
+import React, { useState, useEffect } from 'react';
+import TagsInput from 'react-tagsinput';
+import axios from 'axios';
+import 'react-tagsinput/react-tagsinput.css';
 
 export default function Painel() {
-  const [selected, setSelected] = useState(['Waifus', 'Jogos', 'Livros']);
+  const [selected, setSelected] = useState([]);
+  const [atualizaSucesso, setAtualizaSucesso] = useState('');
+  const [atualizaError, setAtualizaError] = useState('');
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:8000/Preferencias/lista-preferencias')
+      .then((response) => {
+        const preferencesData = response.data.preferencias.map((preference) => preference);
+        setSelected(preferencesData);
+      })
+      .catch((error) => {
+        setAtualizaError(error);
+      });
+  }, []);
+
+  const handleSavePreferences = () => {
+    axios
+      .put('http://localhost:8000/Preferencias/atualiza-preferencias', { preferencias: selected })
+      .then((response) => {
+        setAtualizaSucesso(response.data); // Resposta da API em caso de sucesso
+      })
+      .catch((error) => {
+        setAtualizaError(error); // Trate qualquer erro de requisição
+      });
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-800">
@@ -14,7 +41,7 @@ export default function Painel() {
                 <h2 className="text-base font-semibold leading-7 text-white">Painel de administração</h2>
                 <p className="mt-1 text-sm leading-6 text-gray-600">
                   Aqui o administrador pode escolher as preferências
-                  que estarão disponíveis para o usuários
+                  que estarão disponíveis para os usuários
                   darem match e gerar o relatório.
                 </p>
               </div>
@@ -25,26 +52,21 @@ export default function Painel() {
                     <div className="mt-2 flex items-center">
                       <div>
                         <h1 className="py-3 block text-sm font-medium leading-6 text-white">Adicione ou remova preferências</h1>
-
-                        {/* <pre>{JSON.stringify(selected)}</pre> */}
-
-                        <TagsInput
-                          value={selected}
-                          onChange={setSelected}
-                          name="preferencias"
-                          placeHolder="Digite"
-                        />
-                        <em className="text-white">Pressione o enter para adicionar a nova preferência</em>
+                        <TagsInput value={selected} onChange={setSelected} />
+                        <em className="text-white">Pressione Enter para adicionar uma nova preferência</em>
                       </div>
                     </div>
                     <div className="mt-3 flex gap-x-2">
                       <button
                         type="button"
                         className="px-3 py-1.5 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        onClick={handleSavePreferences}
                       >
                         Salvar
                       </button>
                     </div>
+                    {atualizaError && <p className="text-red-500 text-xs mt-1">{atualizaError}</p>}
+                    {atualizaSucesso && <p className="text-green-500 text-xs mt-1">{atualizaSucesso}</p>}
                   </div>
                 </div>
                 <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">

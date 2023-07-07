@@ -32,6 +32,17 @@ Para usar o [**React Testing Library**](https://testing-library.com/docs/react-t
 ```bash
 npm test
 ```
+Para verificar a cobertura dos testes também utilize o [**Jest**](https://jestjs.io/), primeiro instale o Jest globalmente:
+
+```bash
+npm install -g jest
+```
+
+Depois rode o seguinte comando para verificar a cobertura dos testes:
+
+```bash
+jest --coverage
+```
 
 Para documentar o código com o [**JSDoc**](https://jsdoc.app/), documente o código conforme requerido na documentação da ferramenta e rode:
 

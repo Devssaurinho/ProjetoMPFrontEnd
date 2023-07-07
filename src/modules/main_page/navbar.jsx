@@ -2,12 +2,13 @@ import React from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { XIcon, MenuIcon } from '@heroicons/react/solid';
 import { IoLogOutSharp, IoPersonSharp } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
 import logo from '../../assets/atlax.png';
 
 const navigation = [
   { name: 'Meus matches', href: '/meus', current: true },
-  { name: 'Usuários onlines', href: '#', current: false },
-  { name: 'Grupos onlines', href: '#', current: false },
+  { name: 'Usuários disponíveis', href: '/usuarios', current: false },
+  { name: 'Grupos disponíveis', href: '/grupos', current: false },
 ];
 
 function classNames(...classes) {
@@ -38,16 +39,18 @@ function Navbar() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="block h-8 w-auto lg:hidden"
-                    src={logo}
-                    alt="Atlax"
-                  />
-                  <img
-                    className="hidden h-8 w-auto lg:block"
-                    src={logo}
-                    alt="Atlax"
-                  />
+                  <Link to="/">
+                    <img
+                      className="block h-8 w-auto lg:hidden"
+                      src={logo}
+                      alt="Atlax"
+                    />
+                    <img
+                      className="hidden h-8 w-auto lg:block"
+                      src={logo}
+                      alt="Atlax"
+                    />
+                  </Link>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">

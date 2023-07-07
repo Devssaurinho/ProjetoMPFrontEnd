@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import logo from '../../assets/atlax.png';
+import ann from '../../assets/ann.png';
 
 const serverUrl = 'http://localhost:8000/';
 
@@ -67,7 +68,6 @@ export default function Login() {
       }
       if (response.status === 200) {
         localStorage.setItem('responseData', JSON.stringify(response.data));
-        // Pass the username to the PreferenciasForm component
         const userData = {
           username,
           senha: passwordInt,
@@ -105,12 +105,18 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-800">
+      <div className="relative mt-16 h-80 lg:mt-1">
+        <img
+          className="absolute left-10 right-10 top-10 w-[21rem] max-w-none"
+          src={ann}
+          alt="App screenshot"
+          width={1824}
+          height={1080}
+        />
+      </div>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img className="mx-auto h-50 w-auto" src={logo} alt="Atlax Logo" />
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-[#53a9f6]">
-            Acesse sua conta!
-          </h2>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">

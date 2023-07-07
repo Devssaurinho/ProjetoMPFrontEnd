@@ -2,12 +2,13 @@ import React from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { XIcon, MenuIcon } from '@heroicons/react/solid';
 import { IoLogOutSharp, IoPersonSharp } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
 import logo from '../../assets/atlax.png';
 
 const navigation = [
   { name: 'Meus matches', href: '/meus', current: true },
-  { name: 'Usuários onlines', href: '#', current: false },
-  { name: 'Grupos onlines', href: '#', current: false },
+  { name: 'Usuários disponíveis', href: '/usuarios', current: false },
+  { name: 'Grupos disponíveis', href: '/grupos', current: false },
   { name: 'Chat', href: '/chat', current: true },
 ];
 
@@ -39,16 +40,18 @@ function Navbar() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="block h-8 w-auto lg:hidden"
-                    src={logo}
-                    alt="Atlax"
-                  />
-                  <img
-                    className="hidden h-8 w-auto lg:block"
-                    src={logo}
-                    alt="Atlax"
-                  />
+                  <Link to="/">
+                    <img
+                      className="block h-8 w-auto lg:hidden"
+                      src={logo}
+                      alt="Atlax"
+                    />
+                    <img
+                      className="hidden h-8 w-auto lg:block"
+                      src={logo}
+                      alt="Atlax"
+                    />
+                  </Link>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
@@ -73,7 +76,7 @@ function Navbar() {
                   <div>
                     <Menu.Button className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Abra o menu de usuário</span>
-                      <IoPersonSharp className="w-7 h-7" />
+                      <IoPersonSharp className="w-6 h-6" />
                     </Menu.Button>
                   </div>
                   <Transition
@@ -126,7 +129,7 @@ function Navbar() {
                   onClick={handleLogout}
                 >
                   <span className="sr-only">Sair</span>
-                  <IoLogOutSharp className="h-7 w-7" aria-hidden="true" />
+                  <IoLogOutSharp className="h-6 w-6" aria-hidden="true" />
                 </button>
               </div>
             </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import logo from '../../assets/atlax.png';
+import dance from '../../assets/dancing.png';
 
 export default function Senha() {
   const [id, setId] = useState('');
@@ -36,11 +37,22 @@ export default function Senha() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-800">
+      <div className="relative mt-16 h-auto lg:mt-1 flex justify-end">
+        <div className="pl-80 max-w-full max-h-full">
+          <img
+            className="block mx-auto"
+            src={dance}
+            alt="App screenshot"
+            width={500}
+            height={1080}
+          />
+        </div>
+      </div>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img className="mx-auto h-50 w-auto" src={logo} alt="Atlax Logo" />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-[#53a9f6]">
-            Altere sua senha aqui!
+            Altere sua senha aqui
           </h2>
         </div>
 
@@ -115,6 +127,13 @@ export default function Senha() {
               >
                 Alterar senha
               </button>
+              <a
+                href="/login"
+                type="link"
+                className="my-2 flex w-full justify-center rounded-md bg-[#b30000] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Voltar
+              </a>
             </div>
           </form>
         </div>

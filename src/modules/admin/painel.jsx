@@ -3,6 +3,7 @@ import TagsInput from 'react-tagsinput';
 import { saveAs } from 'file-saver';
 import axios from 'axios';
 import 'react-tagsinput/react-tagsinput.css';
+import cat from '../../assets/cat.png';
 
 export default function Painel() {
   const [selected, setSelected] = useState([]);
@@ -54,6 +55,15 @@ export default function Painel() {
     <div className="min-h-screen flex items-center justify-center bg-gray-800">
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
+          <div className="relative mt-16 h-auto lg:mt-1">
+            <img
+              className="relative mt-16 h-auto lg:mt-1 flex items-center justify-center"
+              src={cat}
+              alt="Boy"
+              width={550}
+              height={1080}
+            />
+          </div>
           <form className="m-10">
             <div className="space-y-12">
               <div className="border-b border-gray-900/10">

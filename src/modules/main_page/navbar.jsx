@@ -5,6 +5,12 @@ import { IoLogOutSharp, IoPersonSharp } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/atlax.png';
 
+/**
+ * Array de objetos de navegação.
+ * Cada objeto representa um item de navegação na barra de navegação.
+ * @type {Array<{name: string, href: string, current: boolean}>}
+ */
+
 const navigation = [
   { name: 'Meus matches', href: '/meus', current: true },
   { name: 'Usuários disponíveis', href: '/usuarios', current: false },
@@ -12,16 +18,34 @@ const navigation = [
   { name: 'Chat', href: '/chat', current: true },
 ];
 
+/**
+ * Função para combinar classes CSS.
+ * @param {...string} classes - As classes CSS a serem combinadas.
+ * @returns {string} Retorna a string de classes CSS combinadas.
+ */
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
+/**
+ * Hook useAdmin.
+ * Um hook personalizado que verifica se o usuário é um administrador.
+ * @returns {boolean} Retorna `true` se o usuário for um administrador, caso contrário, retorna `false`.
+ */
 const useAdmin = () => {
   const responseData = JSON.parse(localStorage.getItem('responseData'));
   return responseData && responseData.admin === 1;
 };
 
+/**
+ * Componente Navbar.
+ * Um componente que exibe a barra de navegação.
+ * @returns {JSX.Element} Retorna o componente Navbar.
+ */
 function Navbar() {
+  /**
+   * Manipula o logout do usuário.
+   */
   const handleLogout = () => {
     localStorage.clear();
     window.location.reload();

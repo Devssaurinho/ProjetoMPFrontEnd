@@ -1,6 +1,12 @@
 import React from 'react';
 import waifu from '../../assets/girl.png';
 
+/**
+ * Componente ContentSection.
+ * Um componente que exibe o conteúdo da páginal principal.
+ * @returns {JSX.Element} Retorna o componente ContentSection.
+ */
+
 export default function ContentSection() {
   return (
     <div className="bg-black">

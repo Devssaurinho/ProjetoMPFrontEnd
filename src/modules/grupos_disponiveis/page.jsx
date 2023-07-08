@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import equipe from '../../assets/equipe.png';
 
+/**
+ * Componente Painel.
+ * Um componente que exibe uma lista de grupos.
+ * @returns {JSX.Element} Retorna o componente Painel.
+ */
+
 export default function Painel() {
   const [groups, setGroups] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -10,6 +16,10 @@ export default function Painel() {
   const totalPages = Math.ceil(Object.keys(groups).length / groupsPerPage);
 
   useEffect(() => {
+    /**
+     * Função para buscar os grupos.
+     * Realiza uma requisição GET para obter a lista de grupos e atualiza o estado "groups" com os dados recebidos.
+     */
     const fetchGroups = async () => {
       try {
         const response = await axios.get('http://localhost:8000/Grupos/lista-grupos');
@@ -22,9 +32,19 @@ export default function Painel() {
     fetchGroups();
   }, []);
 
+  /**
+   * Função para lidar com o clique no botão "Próximo".
+   * Atualiza o estado "currentPage" para exibir a próxima página de grupos.
+   */
+
   const handleClickNext = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
+
+  /**
+   * Função para lidar com o clique no botão "Anterior".
+   * Atualiza o estado "currentPage" para exibir a página anterior de grupos.
+   */
 
   const handleClickPrevious = () => {
     setCurrentPage((prevPage) => prevPage - 1);

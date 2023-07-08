@@ -1,6 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-function Profile({ name, preferences, groups, blockeduser, friends }) {
+function Profile() {
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    const getStoredUsername = () => {
+      const storedUsername = localStorage.getItem('username');
+      if (storedUsername) {
+        setUsername(storedUsername);
+      }
+    };
+
+    getStoredUsername();
+  }, []);
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-800">
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -20,31 +33,11 @@ function Profile({ name, preferences, groups, blockeduser, friends }) {
             >
               Perfil
             </h2>
-            <h2 className="text-white">
-              Nome:
-              <br />
-              {name}
-            </h2>
-            <h2 className="text-white">
-              Preferências:
-              <br />
-              {preferences}
-            </h2>
-            <h2 className="text-white">
-              Grupos:
-              <br />
-              {groups}
-            </h2>
-            <h2 className="text-white">
-              Usuarios bloqueados:
-              <br />
-              {blockeduser}
-            </h2>
-            <h2 className="text-white">
-              Amigos:
-              <br />
-              {friends}
-            </h2>
+            <div className="flex items-center">
+              <h2 className="text-white">Nome de usuário:</h2>
+              <h2 className="text-white ml-2">{username}</h2>
+            </div>
+            {/* Restante do código do perfil */}
           </div>
         </div>
       </div>

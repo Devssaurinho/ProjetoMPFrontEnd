@@ -1,4 +1,32 @@
-import React, { useState } from 'react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: modules/cadastro/form.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: modules/cadastro/form.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from 'react';
 import axios from 'axios';
 import logo from '../../assets/atlax.png';
 import joker from '../../assets/joker.png';
@@ -96,7 +124,7 @@ export default function Cadastro() {
           const { detail } = err.response.data;
           let errorMessage = 'Erro de validação. Por favor, verifique os dados fornecidos.';
 
-          if (detail && Array.isArray(detail) && detail.length > 0) {
+          if (detail &amp;&amp; Array.isArray(detail) &amp;&amp; detail.length > 0) {
             errorMessage = detail.map((error) => error.msg).join('\n');
           }
 
@@ -110,38 +138,38 @@ export default function Cadastro() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-800">
-      <div className="relative mt-16 h-auto lg:mt-1 flex justify-end">
-        <div className="pl-80 max-w-full max-h-full">
-          <img
+    &lt;div className="min-h-screen flex items-center justify-center bg-gray-800">
+      &lt;div className="relative mt-16 h-auto lg:mt-1 flex justify-end">
+        &lt;div className="pl-80 max-w-full max-h-full">
+          &lt;img
             className="block mx-auto"
             src={joker}
             alt="App screenshot"
             width={500}
             height={1080}
           />
-        </div>
-      </div>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
+        &lt;/div>
+      &lt;/div>
+      &lt;div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        &lt;div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          &lt;img
             className="mx-auto h-50 w-auto"
             src={logo}
             alt="Atlax Logo"
           />
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-[#53a9f6]">
+          &lt;h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-[#53a9f6]">
             Crie sua conta
-          </h2>
-        </div>
+          &lt;/h2>
+        &lt;/div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="username" className="block text-sm font-medium leading-6 text-[#53a9f6]">
+        &lt;div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          &lt;form className="space-y-6" onSubmit={handleSubmit}>
+            &lt;div>
+              &lt;label htmlFor="username" className="block text-sm font-medium leading-6 text-[#53a9f6]">
                 Usuário
-              </label>
-              <div className="mt-2">
-                <input
+              &lt;/label>
+              &lt;div className="mt-2">
+                &lt;input
                   id="username"
                   name="username"
                   type="text"
@@ -151,18 +179,18 @@ export default function Cadastro() {
                   onChange={(event) => setUsername(event.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
-              </div>
-              {usernameError && <p className="text-red-500 text-xs mt-1">{usernameError}</p>}
-            </div>
+              &lt;/div>
+              {usernameError &amp;&amp; &lt;p className="text-red-500 text-xs mt-1">{usernameError}&lt;/p>}
+            &lt;/div>
 
-            <div>
-              <div className="flex items-center justify-between">
-                <label htmlFor="senha" className="block text-sm font-medium leading-6 text-[#53a9f6]">
+            &lt;div>
+              &lt;div className="flex items-center justify-between">
+                &lt;label htmlFor="senha" className="block text-sm font-medium leading-6 text-[#53a9f6]">
                   Senha
-                </label>
-              </div>
-              <div className="mt-2">
-                <input
+                &lt;/label>
+              &lt;/div>
+              &lt;div className="mt-2">
+                &lt;input
                   id="senha"
                   name="senha"
                   type="password"
@@ -172,29 +200,52 @@ export default function Cadastro() {
                   onChange={(event) => setSenha(event.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
-              </div>
-              {senhaError && <p className="text-red-500 text-xs mt-1">{senhaError}</p>}
-              {contaSucesso && <p className="text-green-500 text-xs mt-1">{contaSucesso}</p>}
-            </div>
+              &lt;/div>
+              {senhaError &amp;&amp; &lt;p className="text-red-500 text-xs mt-1">{senhaError}&lt;/p>}
+              {contaSucesso &amp;&amp; &lt;p className="text-green-500 text-xs mt-1">{contaSucesso}&lt;/p>}
+            &lt;/div>
 
-            <div>
-              <button
+            &lt;div>
+              &lt;button
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-[#53a9f6] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Criar conta
-              </button>
-              <a
+              &lt;/button>
+              &lt;a
                 href="/login"
                 type="link"
                 className="my-2 flex w-full justify-center rounded-md bg-[#b30000] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Voltar
-              </a>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+              &lt;/a>
+            &lt;/div>
+          &lt;/form>
+        &lt;/div>
+      &lt;/div>
+    &lt;/div>
   );
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Navbar">Navbar</a></li><li><a href="global.html#ProtectedRoutes">ProtectedRoutes</a></li><li><a href="global.html#classNames">classNames</a></li><li><a href="global.html#navigation">navigation</a></li><li><a href="global.html#useAdmin">useAdmin</a></li><li><a href="global.html#useAuth">useAuth</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Jul 08 2023 00:02:35 GMT-0300 (Horário Padrão de Brasília)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

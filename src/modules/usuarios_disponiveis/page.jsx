@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import boy from '../../assets/boy.png';
 
+/**
+ * Componente Painel.
+ * Um componente que exibe um painel com uma lista de usuários paginada.
+ * @returns {JSX.Element} Retorna o componente Painel.
+ */
+
 export default function Painel() {
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -10,6 +16,9 @@ export default function Painel() {
   const totalPages = Math.ceil(users.length / usersPerPage);
 
   useEffect(() => {
+    /**
+     * Função assíncrona para buscar os usuários da API.
+     */
     const fetchUsers = async () => {
       try {
         const response = await axios.get('http://localhost:8000/Usuarios/lista-usuarios');
@@ -22,10 +31,16 @@ export default function Painel() {
     fetchUsers();
   }, []);
 
+  /**
+   * Manipula o clique no botão "Próximo".
+   */
   const handleClickNext = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
 
+  /**
+   * Manipula o clique no botão "Anterior".
+   */
   const handleClickPrevious = () => {
     setCurrentPage((prevPage) => prevPage - 1);
   };

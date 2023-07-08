@@ -1,5 +1,11 @@
 import React from 'react';
 
+/**
+ * Componente Footer.
+ * Um componente que exibe o footer.
+ * @returns {JSX.Element} Retorna o componente Footer.
+ */
+
 export default function Footer() {
   return (
     <footer className="bg-[#4e43ac] text-white py-5">

@@ -3,11 +3,24 @@ import TagsInput from 'react-tagsinput';
 import { saveAs } from 'file-saver';
 import axios from 'axios';
 import 'react-tagsinput/react-tagsinput.css';
+import cat from '../../assets/cat.png';
+
+/**
+ * Componente Painel.
+ * Um componente que exibe um painel de administração.
+ * @returns {JSX.Element} Retorna o componente Painel.
+ */
 
 export default function Painel() {
   const [selected, setSelected] = useState([]);
   const [atualizaSucesso, setAtualizaSucesso] = useState('');
   const [atualizaError, setAtualizaError] = useState('');
+
+  /**
+   * Função para gerar o relatório.
+   * Obtém os dados do localStorage, realiza uma requisição GET para obter o relatório
+   * e faz o download do relatório como um arquivo de texto.
+   */
 
   const gerarRelatorio = () => {
     const localStorageData = localStorage.getItem('responseData');
@@ -28,6 +41,11 @@ export default function Painel() {
   };
 
   useEffect(() => {
+    /**
+     * Função para obter as preferências.
+     * Realiza uma requisição GET para obter a lista de preferências
+     * e atualiza o estado "selected" com os dados recebidos.
+     */
     axios
       .get('http://localhost:8000/Preferencias/lista-preferencias')
       .then((response) => {
@@ -38,6 +56,11 @@ export default function Painel() {
         setAtualizaError(error);
       });
   }, []);
+
+  /**
+   * Função para salvar as preferências.
+   * Realiza uma requisição PUT para atualizar as preferências com os valores selecionados.
+   */
 
   const handleSavePreferences = () => {
     axios
@@ -54,6 +77,15 @@ export default function Painel() {
     <div className="min-h-screen flex items-center justify-center bg-gray-800">
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
+          <div className="relative mt-16 h-auto lg:mt-1">
+            <img
+              className="relative mt-16 h-auto lg:mt-1 flex items-center justify-center"
+              src={cat}
+              alt="Boy"
+              width={550}
+              height={1080}
+            />
+          </div>
           <form className="m-10">
             <div className="space-y-12">
               <div className="border-b border-gray-900/10">

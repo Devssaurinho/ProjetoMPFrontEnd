@@ -5,8 +5,7 @@ import PrefCheckBox from './prefcheckbox';
 export default function PreferenciasForm() {
   const [preferences, setPreferences] = useState([]);
   const navigate = useNavigate();
-  const savedPreferences = JSON.parse(localStorage.getItem('selectedPreferences')) || [];
-  const [selectedPreferences, setSelectedPreferences] = useState(savedPreferences);
+  const [selectedPreferences, setSelectedPreferences] = useState([]);
 
   const fetchPreferences = async () => {
     try {
@@ -24,22 +23,44 @@ export default function PreferenciasForm() {
   const userData = JSON.parse(localStorage.getItem('userData'));
 
   useEffect(() => {
-    fetchPreferences();
-  }, []);
+    if (!userData) {
+      // Se não houver informações de usuário, redireciona para a página de login
+      navigate('/login');
+    } else {
+      fetchPreferences();
+      const savedPreferences = JSON.parse(localStorage.getItem('selectedPreferences'));
+      if (savedPreferences) {
+        setSelectedPreferences(savedPreferences);
+      }
+    }
+  }, [userData, navigate]);
 
   const handlePreferenceChange = (preference) => {
     setSelectedPreferences((prevPreferences) => {
       const updatedPreferences = prevPreferences.includes(preference)
         ? prevPreferences.filter((pref) => pref !== preference)
         : [...prevPreferences, preference];
-      localStorage.setItem('selectedPreferences', JSON.stringify(updatedPreferences));
       return updatedPreferences;
     });
   };
 
-  const handleSavePreferences = () => {
+  const handleSavePreferences = async () => {
     console.log('Selected Preferences:', selectedPreferences);
-    navigate('/'); // substitua a rota '/home' pela rota que você deseja redirecionar
+    try {
+      const response = await fetch(`http://localhost:8000/Usuarios/update/${localStorage.getItem('userData').id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ preferences: selectedPreferences }),
+      });
+      if (!response.ok) {
+        throw new Error('Erro ao atualizar as preferências do usuário');
+      }
+      console.log('Preferências atualizadas com sucesso!');
+    } catch (error) {
+      console.error('Erro ao atualizar as preferências:', error);
+    }
   };
 
   return (
@@ -65,17 +86,24 @@ export default function PreferenciasForm() {
               <PrefCheckBox
                 key={preference}
                 name={preference}
-                userData={userData}
+                checked={selectedPreferences.includes(preference)} // Adiciona a propriedade checked
                 onChange={() => handlePreferenceChange(preference)}
               />
             ))}
             <div className="mt-3 flex gap-x-2">
               <button
                 type="button"
-                className="px-3 py-1.5 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 onClick={handleSavePreferences}
+                className="px-3 py-1.5 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Salvar
+              </button>
+              <button
+                type="button"
+                onClick={() => navigate(-1)}
+                className="px-3 ml-40 py-1.5 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Voltar
               </button>
             </div>
           </div>

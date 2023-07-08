@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 export default function MatchesForm() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [list] = useState([
-    { id: 1, name: 'Person A' },
-    { id: 2, name: 'Person B' },
-    { id: 3, name: 'Group A' },
-    { id: 4, name: 'Group B' },
-  ]);
-  const filteredList = list.filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
-  const handleSearch = () => {
-    // Implemente aqui a lógica adicional que desejar para a ação de busca
-    console.log('Realizar busca:', searchTerm);
+  const [filteredList, setFilteredList] = useState([]);
+
+  const handleSearch = async () => {
+    try {
+      const response = await axios.get('http://localhost:8000/Usuarios/lista-usuarios');
+      setFilteredList(response.data); // Assume que o servidor retorna uma lista de usuários filtrada pelo termo de busca
+    } catch (error) {
+      console.error('Erro ao realizar a busca:', error);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    setSearchTerm(e.target.value);
   };
 
   return (
@@ -31,20 +35,19 @@ export default function MatchesForm() {
                 fontWeight: 'bold',
               }}
             >
-              Encontre aqui usuários/grupos:
+              Encontre usuários/grupos:
             </h2>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <input
                 type="text"
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={handleInputChange}
                 placeholder="Search..."
               />
               <button type="button" onClick={handleSearch} style={{ marginLeft: '10px', color: 'white' }}>
                 Buscar
               </button>
             </div>
-            {/* Render the filtered list */}
             {filteredList.map((item) => (
               <div key={item.id}>{item.name}</div>
             ))}

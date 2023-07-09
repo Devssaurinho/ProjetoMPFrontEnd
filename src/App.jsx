@@ -15,7 +15,16 @@ import Meus from './modules/meus_matches/meus_matches';
 import Perfil from './modules/perfil/perfil';
 import UsuariosDisponiveis from './modules/usuarios_disponiveis/page';
 import GruposDisponiveis from './modules/grupos_disponiveis/page';
+import GruposMat from './modules/grupos/grupos';
 
+function GruposMatch() {
+  return (
+    <div>
+      <Navbar />
+      <GruposMat />
+    </div>
+  );
+}
 function Profile() {
   return (
     <div>
@@ -141,6 +150,7 @@ function App() {
           <Route path="/perfil" element={<Profile />} />
           <Route path="/usuarios" element={<Usuarios />} />
           <Route path="/grupos" element={<Grupos />} />
+          <Route path="/gruposmatch" element={<GruposMatch />} />
         </Route>
       </Routes>
     </Router>

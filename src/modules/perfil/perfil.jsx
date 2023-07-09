@@ -2,16 +2,47 @@ import React, { useEffect, useState } from 'react';
 
 function Profile() {
   const [username, setUsername] = useState('');
+  const [preferencias, setPreferences] = useState('');
+  const [amigos, setAmigos] = useState('');
+  const [bloqueados, setBloqueados] = useState('');
+  const [grupos, setGrupos] = useState('');
+  const [id, setId] = useState('');
 
   useEffect(() => {
-    const getStoredUsername = () => {
-      const storedUsername = localStorage.getItem('username');
-      if (storedUsername) {
-        setUsername(storedUsername);
+    const getStoredData = () => {
+      const userData = JSON.parse(localStorage.getItem('responseData'));
+
+      if (userData.username) {
+        setUsername(userData.username);
+      }
+      if (userData.id) {
+        setId(userData.id);
+      }
+
+      if (userData.preferencias) {
+        const preferencesArray = userData.preferencias;
+        // Unir os elementos do array separados por vírgula
+        const formattedPreferences = preferencesArray.join(', ');
+        setPreferences(formattedPreferences);
+      }
+      if (userData.amigos) {
+        const friendsArray = userData.amigos;
+        const formattedFriends = friendsArray.join(', ');
+        setAmigos(formattedFriends);
+      }
+      if (userData.bloqueados) {
+        const blockedArray = userData.bloqueados;
+        const formattedBlocked = blockedArray.join(', ');
+        setBloqueados(formattedBlocked);
+      }
+      if (userData.grupos) {
+        const groupArray = userData.grupos;
+        const formattedGroup = groupArray.join(', ');
+        setGrupos(formattedGroup);
       }
     };
 
-    getStoredUsername();
+    getStoredData();
   }, []);
 
   return (
@@ -34,8 +65,28 @@ function Profile() {
               Perfil
             </h2>
             <div className="flex items-center">
-              <h2 className="text-white">Nome de usuário:</h2>
+              <h2 className="text-white">Nome:</h2>
               <h2 className="text-white ml-2">{username}</h2>
+            </div>
+            <div className="flex items-center">
+              <h2 className="text-white">Id de usuário:</h2>
+              <h2 className="text-white ml-2">{id}</h2>
+            </div>
+            <div className="flex items-center">
+              <h2 className="text-white">Preferências:</h2>
+              <h2 className="text-white ml-2">{preferencias}</h2>
+            </div>
+            <div className="flex items-center">
+              <h2 className="text-white">Amigos:</h2>
+              <h2 className="text-white ml-2">{amigos}</h2>
+            </div>
+            <div className="flex items-center">
+              <h2 className="text-white">Bloqueados:</h2>
+              <h2 className="text-white ml-2">{bloqueados}</h2>
+            </div>
+            <div className="flex items-center">
+              <h2 className="text-white">Grupos:</h2>
+              <h2 className="text-white ml-2">{grupos}</h2>
             </div>
             {/* Restante do código do perfil */}
           </div>

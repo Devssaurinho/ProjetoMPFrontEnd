@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function Profile() {
   const [username, setUsername] = useState('');
   const [preferencias, setPreferences] = useState('');
-  const [amigos, setAmigos] = useState('');
-  const [bloqueados, setBloqueados] = useState('');
-  const [grupos, setGrupos] = useState('');
+  const [amigos, setAmigos] = useState([]);
+  const [bloqueados, setBloqueados] = useState([]);
+  const [grupos, setGrupos] = useState([]);
   const [id, setId] = useState('');
 
+  const getFriendName = async (friendId) => {
+    try {
+      const response = await axios.get(`http://localhost:8000/Usuarios/lista-usuario-por-id/${friendId}`);
+      const friend = response.data;
+      return friend.username; // Use a propriedade correta que contém o nome do amigo
+    } catch (error) {
+      console.log(`Erro ao buscar o nome do amigo com ID ${friendId}: ${error}`);
+      return '';
+    }
+  };
+
   useEffect(() => {
-    const getStoredData = () => {
+    const getStoredData = async () => {
       const userData = JSON.parse(localStorage.getItem('responseData'));
 
       if (userData.username) {
@@ -18,27 +30,21 @@ function Profile() {
       if (userData.id) {
         setId(userData.id);
       }
-
       if (userData.preferencias) {
         const preferencesArray = userData.preferencias;
-        // Unir os elementos do array separados por vírgula
         const formattedPreferences = preferencesArray.join(', ');
         setPreferences(formattedPreferences);
       }
       if (userData.amigos) {
         const friendsArray = userData.amigos;
-        const formattedFriends = friendsArray.join(', ');
+        const formattedFriends = await Promise.all(friendsArray.map(getFriendName));
         setAmigos(formattedFriends);
       }
       if (userData.bloqueados) {
-        const blockedArray = userData.bloqueados;
-        const formattedBlocked = blockedArray.join(', ');
-        setBloqueados(formattedBlocked);
+        setBloqueados(userData.bloqueados);
       }
       if (userData.grupos) {
-        const groupArray = userData.grupos;
-        const formattedGroup = groupArray.join(', ');
-        setGrupos(formattedGroup);
+        setGrupos(userData.grupos);
       }
     };
 
@@ -78,17 +84,16 @@ function Profile() {
             </div>
             <div className="flex items-center">
               <h2 className="text-white">Amigos:</h2>
-              <h2 className="text-white ml-2">{amigos}</h2>
+              <h2 className="text-white ml-2">{amigos.join(', ')}</h2>
             </div>
             <div className="flex items-center">
               <h2 className="text-white">Bloqueados:</h2>
-              <h2 className="text-white ml-2">{bloqueados}</h2>
+              <h2 className="text-white ml-2">{bloqueados.join(', ')}</h2>
             </div>
             <div className="flex items-center">
               <h2 className="text-white">Grupos:</h2>
-              <h2 className="text-white ml-2">{grupos}</h2>
+              <h2 className="text-white ml-2">{grupos.join(', ')}</h2>
             </div>
-            {/* Restante do código do perfil */}
           </div>
         </div>
       </div>

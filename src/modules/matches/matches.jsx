@@ -33,10 +33,7 @@ export default function MatchesForm() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-800">
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-        <div
-          className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0"
-          style={{ top: '-100px' }}
-        >
+        <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0" style={{ top: '-100px' }}>
           <div className="container py-4 content">
             <h2
               className="text-center mb-4"
@@ -47,21 +44,26 @@ export default function MatchesForm() {
                 fontWeight: 'bold',
               }}
             >
-              Encontre Pessoas:
+              Encontre pessoas ou grupos:
             </h2>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div className="flex items-center">
               <input
                 type="text"
                 value={searchTerm}
                 onChange={handleInputChange}
-                placeholder="Search..."
+                placeholder="Pesquisar..."
+                className="px-4 py-2 rounded-l-md text-gray-800 focus:outline-none focus:ring focus:ring-blue-400"
               />
-              <button type="button" onClick={handleSearch} style={{ marginLeft: '10px', color: 'white' }}>
+              <button
+                type="button"
+                onClick={handleSearch}
+                className="px-4 py-2 rounded-r-md bg-blue-500 text-white font-bold hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-400"
+              >
                 Buscar
               </button>
             </div>
             {filteredList.map((item) => (
-              <div key={item.id}>{item.name}</div>
+              <div key={item.id} className="text-white mt-2">{item.name}</div>
             ))}
           </div>
         </div>

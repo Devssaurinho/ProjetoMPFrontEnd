@@ -44,26 +44,26 @@ function Chat() {
     <div className="min-h-screen flex items-center justify-center bg-gray-800">
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
-          <h2 className="py-3 block text-sm font-medium leading-6 text-white">Chat</h2>
-          <div className="message-container">
+          <h2 className="py-5 text-center text-lg font-bold text-white">Chat</h2>
+          <div className="message-container flex-1 py-6 overflow-y-auto">
             {messages.map((message) => (
-              <div key={message.id} className="message">
+              <div key={message.id} className="message bg-blue-600 text-white p-2 mb-2 rounded-md">
                 {message.text}
               </div>
             ))}
           </div>
-          <div className="input-container">
+          <div className="input-container py-10">
             <input
               type="text"
               value={inputValue}
               onChange={handleInputChange}
-              className="px-3 py-2 rounded-md bg-gray-800 text-white"
+              className="px-3 py-2 bg-gray-800 text-white"
               placeholder="Digite sua mensagem..."
             />
             <button
               onClick={handleSendMessage}
               type="button"
-              className="ml-2 px-4 py-2 rounded-md bg-blue-600 text-white"
+              className="mt-2 px-4 py-2 bg-blue-600 text-white"
             >
               Enviar
             </button>

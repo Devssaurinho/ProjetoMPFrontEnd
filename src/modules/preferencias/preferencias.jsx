@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PrefCheckBox from './prefcheckbox';
+import etrian from '../../assets/etrian.png';
 
 /**
  * Componente PreferenciasForm.
@@ -96,46 +97,53 @@ export default function PreferenciasForm() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-800">
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-        <div
-          className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0"
-          style={{ top: '-100px' }}
-        >
-          <div className="container py-4 content">
-            <h2
-              className="text-center mb-4"
-              style={{
-                fontFamily: 'Verdana, sans-serif',
-                color: 'white',
-                fontSize: '24px',
-                fontWeight: 'bold',
-              }}
-            >
-              Selecione Preferências:
+        <div className="relative isolate overflow-hidden bg-[#4e43ac] px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
+          <div className="container py-20 content">
+            <h2 className="text-center mb-4 text-white text-2xl font-bold">
+              SELECIONE SUAS PREFERÊNCIAS
             </h2>
-            {preferences.map((preference) => (
-              <PrefCheckBox
-                key={preference}
-                name={preference}
-                checked={selectedPreferences.includes(preference)} // Adiciona a propriedade checked
-                onChange={() => handlePreferenceChange(preference)}
-              />
-            ))}
-            <div className="mt-3 flex gap-x-2">
+            <table className="text-white w-full">
+              <tbody>
+                {preferences.map((preference) => (
+                  <tr key={preference}>
+                    <td className="py-2">
+                      <div className="flex items-center gap-2">
+                        <PrefCheckBox
+                          checked={selectedPreferences.includes(preference)}
+                          onChange={() => handlePreferenceChange(preference)}
+                        />
+                        <span>{preference}</span>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="mt-6 flex justify-center">
               <button
                 type="button"
                 onClick={handleSavePreferences}
-                className="px-3 py-1.5 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="px-4 py-2 text-sm font-semibold text-white bg-[#53a9f6] rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Salvar
               </button>
               <button
                 type="button"
                 onClick={() => navigate(-1)}
-                className="px-3 ml-40 py-1.5 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="px-4 py-2 ml-4 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Voltar
               </button>
             </div>
+          </div>
+          <div className="relative mt-16 h-auto lg:mt-1 py-5">
+            <img
+              className="relative mt-16 h-auto lg:mt-1 flex items-center justify-center"
+              src={etrian}
+              alt="Boy"
+              width={850}
+              height={1500}
+            />
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import mitsuru from '../../assets/mitsuru.png';
 
 /**
  * Componente Painel.
@@ -119,20 +120,21 @@ export default function MatchesForm() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-800">
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0" style={{ top: '-100px' }}>
-          <div className="container py-4 content">
-            <h2
-              className="text-center mb-4"
-              style={{
-                fontFamily: 'Verdana, sans-serif',
-                color: 'white',
-                fontSize: '24px',
-                fontWeight: 'bold',
-              }}
-            >
-              Encontre pessoas ou grupos:
+        <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
+          <div className="relative mt-16 h-auto lg:mt-1 py-5">
+            <img
+              className="relative mt-16 h-auto lg:mt-1 flex items-center justify-center"
+              src={mitsuru}
+              alt="girl"
+              width={700}
+              height={1500}
+            />
+          </div>
+          <div className="container py-10 content">
+            <h2 className="mb-4 text-white text-2xl font-bold">
+              Encontre pessoas ou grupos
             </h2>
-            <div className="flex items-center">
+            <div className="flex items-center py-5">
               <input
                 type="text"
                 value={searchTerm}
@@ -143,26 +145,19 @@ export default function MatchesForm() {
               <button
                 type="button"
                 onClick={handleSearch}
-                className="px-4 py-2 rounded-r-md bg-blue-500 text-white font-bold hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-400"
+                className="px-4 py-2 rounded-r-md bg-[#4e42ac] text-white font-bold hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-400"
               >
                 Buscar
               </button>
             </div>
             {searchPerformed && filteredList.length > 0 && filteredList.map((item) => (
-              <div className="text-white" key={item.id}>
-                {item.username}
+              <div className="flex items-center justify-between text-white py-2" key={item.id}>
+                <div>{item.username}</div>
                 {userData && userData.amigos && userData.amigos.includes(item.id) ? (
                   <button
                     type="button"
                     onClick={() => handleAddFriend(item.id)}
-                    style={{
-                      marginLeft: '136px',
-                      backgroundColor: 'red',
-                      borderRadius: '12px',
-                      padding: '3px 9px',
-                      border: 'none',
-                      cursor: 'pointer',
-                    }}
+                    className="px-3 py-1 text-sm font-semibold text-white bg-red-500 rounded-md shadow-sm hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-400"
                   >
                     Remover
                   </button>
@@ -170,14 +165,7 @@ export default function MatchesForm() {
                   <button
                     type="button"
                     onClick={() => handleAddFriend(item.id)}
-                    style={{
-                      marginLeft: '136px',
-                      backgroundColor: 'green',
-                      borderRadius: '12px',
-                      padding: '3px 9px',
-                      border: 'none',
-                      cursor: 'pointer',
-                    }}
+                    className="px-3 py-1 text-sm font-semibold text-white bg-[#53a9f6] rounded-md shadow-sm hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-400"
                   >
                     Adicionar
                   </button>
@@ -188,7 +176,7 @@ export default function MatchesForm() {
               <button
                 type="button"
                 onClick={handleSaveFriends}
-                className="px-3 py-1.5 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="mr-4 mt-4 px-3 py-1.5 text-sm font-semibold text-white bg-[#4e42ac] rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Salvar Amigos
               </button>
@@ -196,7 +184,7 @@ export default function MatchesForm() {
             <button
               type="button"
               onClick={() => navigate(-1)}
-              className="px-3 ml-20 py-1.5 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="mt-6 px-3 py-1.5 text-sm font-semibold text-white bg-[#4e42ac] rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Voltar
             </button>

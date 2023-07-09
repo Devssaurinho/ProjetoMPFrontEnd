@@ -14,13 +14,13 @@ export default function PreferenciasForm() {
         throw new Error('Erro ao obter as preferências');
       }
       const data = await response.json();
-      setPreferences(data);
+      await setPreferences(data);
     } catch (error) {
       console.error('Erro ao obter as preferências:', error);
     }
   };
 
-  const userData = JSON.parse(localStorage.getItem('userData'));
+  const userData = JSON.parse(localStorage.getItem('responseData'));
 
   useEffect(() => {
     if (!userData) {
@@ -28,12 +28,12 @@ export default function PreferenciasForm() {
       navigate('/login');
     } else {
       fetchPreferences();
-      const savedPreferences = JSON.parse(localStorage.getItem('selectedPreferences'));
+      const savedPreferences = userData.preferencias;
       if (savedPreferences) {
         setSelectedPreferences(savedPreferences);
       }
     }
-  }, [userData, navigate]);
+  }, []);
 
   const handlePreferenceChange = (preference) => {
     setSelectedPreferences((prevPreferences) => {
@@ -47,12 +47,12 @@ export default function PreferenciasForm() {
   const handleSavePreferences = async () => {
     console.log('Selected Preferences:', selectedPreferences);
     try {
-      const response = await fetch(`http://localhost:8000/Usuarios/update/${localStorage.getItem('userData').id}`, {
+      const response = await fetch(`http://localhost:8000/Usuarios/update/${userData.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ preferences: selectedPreferences }),
+        body: JSON.stringify({ preferencias: selectedPreferences }),
       });
       if (!response.ok) {
         throw new Error('Erro ao atualizar as preferências do usuário');
@@ -61,6 +61,8 @@ export default function PreferenciasForm() {
     } catch (error) {
       console.error('Erro ao atualizar as preferências:', error);
     }
+    userData.preferencias = selectedPreferences;
+    localStorage.setItem('responseData', JSON.stringify(userData));
   };
 
   return (

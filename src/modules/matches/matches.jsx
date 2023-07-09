@@ -15,6 +15,18 @@ export default function MatchesForm() {
   };
 
   const handleInputChange = (e) => {
+    e.preventDefault();
+    const { value } = e.target;
+
+    if (!value) return;
+
+    const url = `http://localhost:8000/Usuarios/lista-usuario-por-username/${value}`;
+
+    fetch(url)
+      .then((response) => response.json())
+      .then(console.log);
+
+    console.log('handleInputChange', e.target.value);
     setSearchTerm(e.target.value);
   };
 
@@ -35,7 +47,7 @@ export default function MatchesForm() {
                 fontWeight: 'bold',
               }}
             >
-              Encontre usuários/grupos:
+              Encontre Pessoas:
             </h2>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <input

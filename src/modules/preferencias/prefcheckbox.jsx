@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function PrefCheckBox({ name, onChange }) {
-  const [isChecked, setChecked] = useState(false);
+export default function PrefCheckBox({ name, onChange, checked }) {
+  const [isChecked, setChecked] = useState(checked);
 
   const handleOnChange = () => {
     setChecked((current) => !current);

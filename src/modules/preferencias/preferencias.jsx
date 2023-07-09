@@ -1,11 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import PrefCheckBox from './prefcheckbox';
+
+/**
+ * Componente PreferenciasForm.
+ * Um componente que exibe uma lista de preferências.
+ * @returns {JSX.Element} Retorna o componente PreferenciasForm.
+ */
 
 export default function PreferenciasForm() {
   const [preferences, setPreferences] = useState([]);
   const navigate = useNavigate();
   const [selectedPreferences, setSelectedPreferences] = useState([]);
+
+  /**
+   * Função fetchPreferences
+   * Realiza uma requisição GET para obter a lista de preferências e atualiza o estado "preferences" com os dados recebidos.
+   */
 
   const fetchPreferences = async () => {
     try {
@@ -24,7 +37,10 @@ export default function PreferenciasForm() {
 
   useEffect(() => {
     if (!userData) {
-      // Se não houver informações de usuário, redireciona para a página de login
+      /**
+       * Função para exigir o login do usuario.
+       * Realiza uma requisição de login se caso não obter as informações do usuário, para ter acesso as escolhas das preferencias.
+       */
       navigate('/login');
     } else {
       fetchPreferences();
@@ -35,6 +51,12 @@ export default function PreferenciasForm() {
     }
   }, []);
 
+  /**
+   * Função handlePreferenceChange
+   * Atualiza o estado "selectedPreferences" com as preferências selecionadas pelo usuário.
+   * @param {string} preference - A preferência selecionada pelo usuário.
+   */
+
   const handlePreferenceChange = (preference) => {
     setSelectedPreferences((prevPreferences) => {
       const updatedPreferences = prevPreferences.includes(preference)
@@ -43,6 +65,12 @@ export default function PreferenciasForm() {
       return updatedPreferences;
     });
   };
+
+  /**
+   * Função handleSavePreferences
+   * Envia uma requisição PUT para atualizar as preferências do usuário no servidor.
+   * Atualiza o estado local e o armazenamento local com as preferências selecionadas.
+   */
 
   const handleSavePreferences = async () => {
     console.log('Selected Preferences:', selectedPreferences);
@@ -57,7 +85,7 @@ export default function PreferenciasForm() {
       if (!response.ok) {
         throw new Error('Erro ao atualizar as preferências do usuário');
       }
-      console.log('Preferências atualizadas com sucesso!');
+      toast.success('Preferências atualizadas com sucesso!');
     } catch (error) {
       console.error('Erro ao atualizar as preferências:', error);
     }
@@ -111,6 +139,7 @@ export default function PreferenciasForm() {
           </div>
         </div>
       </div>
+      <ToastContainer autoClose={3000} />
     </div>
   );
 }

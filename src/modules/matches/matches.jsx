@@ -1,32 +1,118 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+/**
+ * Componente Painel.
+ * Um componente que exibe uma lista de usuarios com que se pode fazer amizades.
+ * @returns {JSX.Element} Retorna o componente Painel.
+ */
 
 export default function MatchesForm() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredList, setFilteredList] = useState([]);
+  const [searchPerformed, setSearchPerformed] = useState(false);
+  const userData = JSON.parse(localStorage.getItem('responseData'));
+  const navigate = useNavigate();
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/Usuarios/lista-usuarios');
-      setFilteredList(response.data); // Assume que o servidor retorna uma lista de usuários filtrada pelo termo de busca
+      const response = await fetch('http://localhost:8000/Usuarios/lista-usuarios');
+      const data = await response.json();
+      const filteredUsers = data.filter((item) => item.username.toLowerCase().includes(searchTerm.toLowerCase()));
+      setFilteredList(filteredUsers);
+      setSearchPerformed(true);
     } catch (error) {
       console.error('Erro ao realizar a busca:', error);
     }
   };
 
+  /**
+    * Função handleAddFriend
+    * Adiciona ou remove um amigo da lista de amigos do usuário.
+    * Realiza uma chamada à API para atualizar os amigos do usuário.
+    * @param {string} userId - O ID do usuário amigo.
+    */
+
+  const handleAddFriend = async (userId) => {
+    if (userData) {
+      const updatedUserData = { ...userData };
+      if (updatedUserData.amigos) {
+        if (!updatedUserData.amigos.includes(userId)) {
+          updatedUserData.amigos.push(userId);
+          localStorage.setItem('responseData', JSON.stringify(updatedUserData));
+          toast.success('Amigo adicionado com sucesso!');
+        } else {
+          updatedUserData.amigos = updatedUserData.amigos.filter((amigo) => amigo !== userId);
+          localStorage.setItem('responseData', JSON.stringify(updatedUserData));
+          toast.success('Amigo removido com sucesso!');
+        }
+
+        try {
+          const response = await fetch(`http://localhost:8000/Usuarios/update/${userData.id}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ amigos: updatedUserData.amigos }),
+          });
+          if (!response.ok) {
+            throw new Error('Erro ao atualizar os amigos do usuário');
+          }
+          console.log('Amigos do usuário atualizados com sucesso!');
+        } catch (error) {
+          console.error('Erro ao atualizar os amigos do usuário:', error);
+        }
+      } else {
+        updatedUserData.amigos = [userId];
+        localStorage.setItem('responseData', JSON.stringify(updatedUserData));
+        toast.success('Amigo adicionado com sucesso!');
+
+        try {
+          const response = await fetch(`http://localhost:8000/Usuarios/update/${userData.id}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ amigos: updatedUserData.amigos }),
+          });
+          if (!response.ok) {
+            throw new Error('Erro ao atualizar os amigos do usuário');
+          }
+          console.log('Amigos do usuário atualizados com sucesso!');
+        } catch (error) {
+          console.error('Erro ao atualizar os amigos do usuário:', error);
+        }
+      }
+    } else {
+      console.log('Usuário não encontrado.');
+    }
+  };
+
+  /**
+    * Função handleSaveFriends
+    * Salva a lista de amigos atualizada no armazenamento local.
+    */
+
+  const handleSaveFriends = () => {
+    if (userData) {
+      const updatedUserData = { ...userData };
+      updatedUserData.amigos = filteredList.map((item) => item.id);
+      localStorage.setItem('responseData', JSON.stringify(updatedUserData));
+      toast.success('Amigos salvos com sucesso!');
+    } else {
+      toast.success('Usuário não encontrado!');
+    }
+  };
+
+  /**
+    * Função handleInputChange
+    * Atualiza o estado do termo de busca com o valor do campo de entrada.
+    * @param {object} e - O evento de alteração do campo de entrada.
+    */
+
   const handleInputChange = (e) => {
-    e.preventDefault();
-    const { value } = e.target;
-
-    if (!value) return;
-
-    const url = `http://localhost:8000/Usuarios/lista-usuario-por-username/${value}`;
-
-    fetch(url)
-      .then((response) => response.json())
-      .then(console.log);
-
-    console.log('handleInputChange', e.target.value);
     setSearchTerm(e.target.value);
   };
 
@@ -56,16 +142,78 @@ export default function MatchesForm() {
                 onChange={handleInputChange}
                 placeholder="Search..."
               />
-              <button type="button" onClick={handleSearch} style={{ marginLeft: '10px', color: 'white' }}>
+              <button
+                type="button"
+                onClick={handleSearch}
+                style={{
+                  marginLeft: '10px',
+                  color: 'white',
+                  backgroundColor: 'purple',
+                  borderRadius: '10px',
+                  padding: '3px 10px',
+                  border: 'none',
+                  cursor: 'pointer',
+                }}
+              >
                 Buscar
               </button>
             </div>
-            {filteredList.map((item) => (
-              <div key={item.id}>{item.name}</div>
+            {searchPerformed && filteredList.length > 0 && filteredList.map((item) => (
+              <div className="text-white" key={item.id}>
+                {item.username}
+                {userData && userData.amigos && userData.amigos.includes(item.id) ? (
+                  <button
+                    type="button"
+                    onClick={() => handleAddFriend(item.id)}
+                    style={{
+                      marginLeft: '136px',
+                      backgroundColor: 'red',
+                      borderRadius: '12px',
+                      padding: '3px 9px',
+                      border: 'none',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    Remover
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => handleAddFriend(item.id)}
+                    style={{
+                      marginLeft: '136px',
+                      backgroundColor: 'green',
+                      borderRadius: '12px',
+                      padding: '3px 9px',
+                      border: 'none',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    Adicionar
+                  </button>
+                )}
+              </div>
             ))}
+            {searchPerformed && filteredList.length > 0 && (
+              <button
+                type="button"
+                onClick={handleSaveFriends}
+                className="px-3 py-1.5 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Salvar Amigos
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => navigate(-1)}
+              className="px-3 ml-20 py-1.5 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              Voltar
+            </button>
           </div>
         </div>
       </div>
+      <ToastContainer autoClose={3000} />
     </div>
   );
 }

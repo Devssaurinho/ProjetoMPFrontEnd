@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import cat from '../../assets/cat2.png';
 
 function Profile() {
   const [username, setUsername] = useState('');
@@ -58,41 +59,74 @@ function Profile() {
           className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0"
           style={{ top: '-100px' }}
         >
+          <div className="relative mt-16 h-auto lg:mt-1 py-5">
+            <img
+              className="relative mt-16 h-auto lg:mt-1 flex items-center justify-center"
+              src={cat}
+              alt="Boy"
+              width={600}
+              height={1500}
+            />
+          </div>
           <div className="container py-4 content">
-            <h2
-              className="text-center mb-4"
-              style={{
-                fontFamily: 'Verdana, sans-serif',
-                color: 'white',
-                fontSize: '24px',
-                fontWeight: 'bold',
-              }}
-            >
+            <h2 className="text-center mb-4 text-white text-2xl font-bold">
               Perfil
             </h2>
-            <div className="flex items-center">
-              <h2 className="text-white">Nome:</h2>
-              <h2 className="text-white ml-2">{username}</h2>
-            </div>
-            <div className="flex items-center">
-              <h2 className="text-white">Id de usuário:</h2>
-              <h2 className="text-white ml-2">{id}</h2>
-            </div>
-            <div className="flex items-center">
-              <h2 className="text-white">Preferências:</h2>
-              <h2 className="text-white ml-2">{preferencias}</h2>
-            </div>
-            <div className="flex items-center">
-              <h2 className="text-white">Amigos:</h2>
-              <h2 className="text-white ml-2">{amigos.join(', ')}</h2>
-            </div>
-            <div className="flex items-center">
-              <h2 className="text-white">Bloqueados:</h2>
-              <h2 className="text-white ml-2">{bloqueados.join(', ')}</h2>
-            </div>
-            <div className="flex items-center">
-              <h2 className="text-white">Grupos:</h2>
-              <h2 className="text-white ml-2">{grupos.join(', ')}</h2>
+            <table className="text-white w-full">
+              <tbody>
+                <tr className="bg-[#4e43ac]">
+                  <td className="font-bold px-4 py-2 border-b border-[#4eaaff]">
+                    Nome:
+                  </td>
+                  <td className="px-4 py-2 border-b border-[#4eaaff]">
+                    {username}
+                  </td>
+                </tr>
+                <tr className="bg-[#4e43ac]">
+                  <td className="font-bold px-4 py-2 border-b border-[#4eaaff]">
+                    ID de usuário:
+                  </td>
+                  <td className="px-4 py-2 border-b border-[#4eaaff]">
+                    {id}
+                  </td>
+                </tr>
+                <tr className="bg-[#4e43ac]">
+                  <td className="font-bold px-4 py-2 border-b border-[#4eaaff]">
+                    Preferências:
+                  </td>
+                  <td className="px-4 py-2 border-b border-[#4eaaff]">
+                    {preferencias}
+                  </td>
+                </tr>
+                <tr className="bg-[#4e43ac]">
+                  <td className="font-bold px-4 py-2 border-b border-[#4eaaff]">
+                    Amigos:
+                  </td>
+                  <td className="px-4 py-2 border-b border-[#4eaaff]">
+                    {amigos.join(', ')}
+                  </td>
+                </tr>
+                <tr className="bg-[#4e43ac]">
+                  <td className="font-bold px-4 py-2 border-b border-[#4eaaff]">
+                    Bloqueados:
+                  </td>
+                  <td className="px-4 py-2 border-b border-[#4eaaff]">
+                    {bloqueados}
+                  </td>
+                </tr>
+                <tr className="bg-[#4e43ac]">
+                  <td className="font-bold px-4 py-2">Grupos:</td>
+                  <td className="px-4 py-2">{grupos}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div className="mt-6 flex items-center justify-end gap-x-6">
+              <a
+                href="/"
+                className="rounded-md bg-[#4e42ac] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Voltar
+              </a>
             </div>
           </div>
         </div>

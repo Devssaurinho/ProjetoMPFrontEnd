@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import blue from '../../assets/blue.png';
 
 export default function Meus() {
   const [data, setData] = useState(null);
@@ -37,21 +38,40 @@ export default function Meus() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-800">
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-        <h2 className="py-3 block text-sm font-medium leading-6 text-white"> Lista de Match</h2>
+        <h2 className="py-3 text-center text-lg font-bold text-white">MATCHES</h2>
         <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
-          <div className="mt-10 mb-9 flex items-center justify-center gap-x-6 lg:justify-start">
-            <div className="my-1 mb-9">
+          <div className="relative mt-16 h-auto lg:mt-1 py-5">
+            <img
+              className="relative mt-16 h-auto lg:mt-1 flex items-center justify-center"
+              src={blue}
+              alt="Boy"
+              width={350}
+              height={1500}
+            />
+          </div>
+          <div className="mt-10 mb-9 flex items-center justify-center lg:justify-start">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {data !== null && Object.entries(data).map(([key, value]) => (
-                <li className="my-1 text-white" key={key}>
-                  {key}
-                  :
-                  {value}
-                  <div className="hidden sm:flex sm:flex-col sm:items-end">
-                    <p className="text-sm leading-6 text-gray-900">Co-Founder / CEO</p>
+                <div key={key} className="bg-gray-800 rounded-md p-6 flex flex-col items-center justify-center text-white">
+                  <h3 className="text-lg font-semibold mb-4">{key}</h3>
+                  <p className="text-sm">{value}</p>
+                  <div className="flex mt-4">
+                    <button
+                      type="button"
+                      className="px-4 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      onClick={Adicionou}
+                    >
+                      Adicionar
+                    </button>
+                    <button
+                      type="button"
+                      className="ml-2 px-4 py-2 text-sm font-semibold text-gray-900 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                      onClick={Adicionou}
+                    >
+                      Bloquear
+                    </button>
                   </div>
-                  <button type="button" className="ml-9 px-3 py-1.5 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={Adicionou}> Adicionar </button>
-                  <button type="button" className="mx-1 rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" onClick={Adicionou}>Bloquear </button>
-                </li>
+                </div>
               ))}
             </div>
           </div>

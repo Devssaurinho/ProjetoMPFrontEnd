@@ -132,7 +132,7 @@ export default function MatchesForm() {
           </div>
           <div className="container py-10 content">
             <h2 className="mb-4 text-white text-2xl font-bold">
-              Encontre pessoas ou grupos
+              Encontre pessoas
             </h2>
             <div className="flex items-center py-5">
               <input

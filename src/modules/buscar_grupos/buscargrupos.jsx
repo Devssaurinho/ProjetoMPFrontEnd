@@ -73,6 +73,41 @@ export default function EncontrarGrupos() {
     }
   };
 
+  const handleLeaveGroup = async (groupName) => {
+    if (userData) {
+      try {
+        const response = await fetch(`http://localhost:8000/Grupos/att-grupo/del-membro/${groupName}/${userData.username}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            // adicione outros dados necessários aqui
+          }),
+        });
+
+        if (response.ok) {
+          toast.success(`Saiu do grupo ${groupName} com sucesso!`);
+        } else {
+          toast.error('Erro ao sair do grupo. Tente novamente mais tarde.');
+        }
+      } catch (error) {
+        console.error('Erro ao sair do grupo:', error);
+        toast.error('Erro ao sair do grupo. Tente novamente mais tarde.');
+      }
+    } else {
+      console.log('Usuário não encontrado.');
+    }
+  };
+
+  const handleSave = () => {
+    // Lógica para salvar os dados
+    // Exemplo: enviar resultados para a API de salvamento
+
+    // Exibir uma mensagem de sucesso ao salvar
+    toast.success('Dados salvos com sucesso!');
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-800">
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -110,13 +145,23 @@ export default function EncontrarGrupos() {
                   {resultados.map((grupo) => (
                     <li className="flex items-center justify-between text-white py-2" key={grupo.id}>
                       {grupo.nome}
-                      <button
-                        type="button"
-                        onClick={() => handleJoinGroup(grupo.nome)}
-                        className="px-3 py-1 text-sm font-semibold text-white bg-green-500 rounded-md shadow-sm hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-400"
-                      >
-                        Entrar
-                      </button>
+                      {grupo.membros.includes(userData?.username) ? (
+                        <button
+                          type="button"
+                          onClick={() => handleLeaveGroup(grupo.nome)}
+                          className="px-3 py-1 text-sm font-semibold text-white bg-red-500 rounded-md shadow-sm hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-400"
+                        >
+                          Sair
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => handleJoinGroup(grupo.nome)}
+                          className="px-3 py-1 text-sm font-semibold text-white bg-green-500 rounded-md shadow-sm hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-400"
+                        >
+                          Entrar
+                        </button>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -125,6 +170,13 @@ export default function EncontrarGrupos() {
                   {termoPesquisa ? 'Nenhum grupo encontrado.' : 'Digite um termo de pesquisa.'}
                 </p>
               )}
+              <button
+                type="button"
+                onClick={handleSave}
+                className="mt-6 mr-2 px-3 py-1.5 text-sm font-semibold text-white bg-[#4e42ac] rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Salvar
+              </button>
               <button
                 type="button"
                 onClick={() => navigate(-1)}

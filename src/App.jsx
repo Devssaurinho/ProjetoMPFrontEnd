@@ -15,7 +15,7 @@ import Perfil from './modules/perfil/perfil';
 import UsuariosDisponiveis from './modules/usuarios_disponiveis/page';
 import GruposDisponiveis from './modules/grupos_disponiveis/page';
 import GruposMat from './modules/grupos/grupos';
-import Chat from './modules/chat/chat';
+import EncontrarGrupos from './modules/buscar_grupos/buscargrupos';
 
 function GruposMatch() {
   return (
@@ -129,6 +129,15 @@ function Grupos() {
   );
 }
 
+function BuscarGrupos() {
+  return (
+    <div>
+      <Navbar />
+      <EncontrarGrupos />
+    </div>
+  );
+}
+
 function App() {
   const localStorageData = localStorage.getItem('responseData');
   const responseData = localStorageData ? JSON.parse(localStorageData) : null;
@@ -151,6 +160,7 @@ function App() {
           <Route path="/usuarios" element={<Usuarios />} />
           <Route path="/grupos" element={<Grupos />} />
           <Route path="/gruposmatch" element={<GruposMatch />} />
+          <Route path="/buscargrupos" element={<BuscarGrupos />} />
         </Route>
       </Routes>
     </Router>

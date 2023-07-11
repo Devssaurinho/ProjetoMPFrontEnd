@@ -16,6 +16,7 @@ import UsuariosDisponiveis from './modules/usuarios_disponiveis/page';
 import GruposDisponiveis from './modules/grupos_disponiveis/page';
 import GruposMat from './modules/grupos/grupos';
 import EncontrarGrupos from './modules/buscar_grupos/buscargrupos';
+import Chat from './modules/chat/chat';
 
 function GruposMatch() {
   return (

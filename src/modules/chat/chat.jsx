@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
 function Chat() {
   const [group] = useState(null);
@@ -8,27 +7,28 @@ function Chat() {
   const [message, setMessage] = useState('');
   const [data, setData] = useState(null);
 
-  // Função para obter os Matchs
+  // Função para obter as mensagens privadas
   const getMensagemPriv = async () => {
     const storedData = localStorage.getItem('responseData');
     console.log(storedData);
     const destinatario = JSON.parse(storedData);
     const idUsuario = JSON.parse(storedData);
     console.log(idUsuario);
-    const guardaamigo = destinatario.amigos[0];
+    const guardaamigo = destinatario.amigos[1];
     try {
-      const response = await axios.post(`http://localhost:8000/ChatPrivado/buscar-mensagens/${idUsuario.id}/${guardaamigo}`);
+      const response = await fetch(`http://localhost:8000/ChatPrivado/buscar-mensagens/${idUsuario.id}/${guardaamigo}`);
+      console.log(response);
       if (!response.ok) {
-        throw new Error('erro ao obter mensagens privadas');
+        throw new Error('Erro ao obter mensagens privadas');
       }
       const responseData = await response.json();
       setData(responseData);
       console.log(data);
     } catch (error) {
-      console.error('IVANOVINHO', error);
+      console.error('Erro ao obter mensagens privadas:', error);
     }
   };
-  getMensagemPriv();
+
   const getMatchs = async (id) => {
     console.log(id);
     try {
@@ -47,7 +47,7 @@ function Chat() {
 
   // Função para enviar a mensagem
   const sendMessage = async (groupId) => {
-    console.log('cliquei na poha do botao');
+    console.log('cliquei no botão');
     const storedData = localStorage.getItem('responseData');
     const { id } = JSON.parse(storedData);
 
@@ -57,12 +57,22 @@ function Chat() {
         console.error('Grupo não definido');
         return;
       }
-      const response = await axios.post(`http://localhost:8000/ChatGrupo/grupos_mensagens/${groupId}/${userId}/`, {
-        message,
-        userId,
+      const response = await fetch(`http://localhost:8000/ChatGrupo/grupos_mensagens/${groupId}/${userId}/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message,
+          userId,
+        }),
       });
+      if (!response.ok) {
+        throw new Error('Erro ao enviar mensagem');
+      }
+      const responseData = await response.json();
       // Atualiza a lista de mensagens com a nova mensagem enviada
-      setMessages([...messages, response.data]);
+      setMessages([...messages, responseData]);
       // Limpa o campo de mensagem
       setMessage('');
     } catch (error) {
@@ -80,8 +90,9 @@ function Chat() {
       return null;
     };
 
-    const userId = getStoredId(); // Retrieve the stored id
-    getMatchs(userId); // Call getMatchs with the id
+    const userId = getStoredId(); // Recupera o ID armazenado
+    getMatchs(userId); // Chama a função getMatchs com o ID
+    getMensagemPriv(); // Chama a função getMensagemPriv para obter as mensagens privadas
   }, []);
 
   return (
@@ -145,6 +156,16 @@ function Chat() {
         </div>
         <div className="relative isolate overflow-hidden bg-[#4e43ac] px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
           <h2>Chat Privado</h2>
+          {data && (
+            <div>
+              {data.map((mensagem) => (
+                <div key={mensagem.id}>
+                  <h3>{mensagem.mensagem}</h3>
+                  <p>{mensagem.timestamp}</p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

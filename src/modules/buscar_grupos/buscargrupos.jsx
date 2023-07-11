@@ -7,7 +7,7 @@ import mitsuru from '../../assets/mitsuru.png';
 export default function EncontrarGrupos() {
   const [termoPesquisa, setTermoPesquisa] = useState('');
   const [resultados, setResultados] = useState([]);
-  const [userData, setUserData] = useState(null); // Estado para armazenar os dados do usuário
+  const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,7 +23,6 @@ export default function EncontrarGrupos() {
 
     fetchData();
 
-    // Obter dados do usuário do localStorage
     const storedUserData = localStorage.getItem('responseData');
     if (storedUserData) {
       setUserData(JSON.parse(storedUserData));
@@ -48,14 +47,9 @@ export default function EncontrarGrupos() {
   };
 
   const handleJoinGroup = async (groupName) => {
-    console.log(groupName);
     if (userData) {
-      console.log(userData);
-      const grupoId = userData.grupos[0]; // Acessando o primeiro grupo do array
-      const apiUrl = `http://localhost:8000/Grupos/att-grupo/add-membro/${userData.username}/${grupoId}/${userData.username}`;
-
       try {
-        const response = await fetch(apiUrl, {
+        const response = await fetch(`http://localhost:8000/Grupos/att-grupo/add-membro/${groupName}/${userData.username}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -77,7 +71,6 @@ export default function EncontrarGrupos() {
     } else {
       console.log('Usuário não encontrado.');
     }
-    console.log(localStorage);
   };
 
   return (
@@ -95,9 +88,7 @@ export default function EncontrarGrupos() {
           </div>
           <div className="container py-10 content">
             <div>
-              <h2 className="mb-4 text-white text-2xl font-bold">
-                Encontrar Grupos
-              </h2>
+              <h2 className="mb-4 text-white text-2xl font-bold">Encontrar Grupos</h2>
               <div>
                 <input
                   type="text"

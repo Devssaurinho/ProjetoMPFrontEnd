@@ -114,7 +114,7 @@ export default function Meus() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-800">
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-        <h2 className="py-3 text-center text-lg font-bold text-white">MATCHES</h2>
+        <h2 className="mb-8 mt-4 py-3 bg-white rounded-md px-3 text-gray-800 text-center font-extrabold text-2xl">MATCHES</h2>
         <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
           <div className="relative mt-16 h-auto lg:mt-1 py-5">
             <img

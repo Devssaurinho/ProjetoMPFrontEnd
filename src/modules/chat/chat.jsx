@@ -97,7 +97,7 @@ function Chat() {
                     height={1500}
                   />
                 </div>
-                <h2 className="mb-2 py-4">Meus amigos</h2>
+                <h2 className="mb-8 mt-4 py-3 bg-white rounded-md px-3 text-gray-800">Meus amigos</h2>
                 <ul>
                   {amigos.map((amigo) => (
                     <li key={amigo} className="mb-2">

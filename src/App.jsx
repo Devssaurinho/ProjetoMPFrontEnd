@@ -10,12 +10,13 @@ import Painel from './modules/admin/painel';
 import PreferenciasForm from './modules/preferencias/preferencias';
 import MatchesForm from './modules/matches/matches';
 import ProtectedRoutes from './services/ProtectedRoutes';
-import Chat from './modules/chat/chat';
 import Meus from './modules/meus_matches/meus_matches';
 import Perfil from './modules/perfil/perfil';
 import UsuariosDisponiveis from './modules/usuarios_disponiveis/page';
 import GruposDisponiveis from './modules/grupos_disponiveis/page';
 import GruposMat from './modules/grupos/grupos';
+import EncontrarGrupos from './modules/buscar_grupos/buscargrupos';
+import Chat from './modules/chat/chat';
 
 function GruposMatch() {
   return (
@@ -129,6 +130,15 @@ function Grupos() {
   );
 }
 
+function BuscarGrupos() {
+  return (
+    <div>
+      <Navbar />
+      <EncontrarGrupos />
+    </div>
+  );
+}
+
 function App() {
   const localStorageData = localStorage.getItem('responseData');
   const responseData = localStorageData ? JSON.parse(localStorageData) : null;
@@ -151,6 +161,7 @@ function App() {
           <Route path="/usuarios" element={<Usuarios />} />
           <Route path="/grupos" element={<Grupos />} />
           <Route path="/gruposmatch" element={<GruposMatch />} />
+          <Route path="/buscargrupos" element={<BuscarGrupos />} />
         </Route>
       </Routes>
     </Router>

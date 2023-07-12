@@ -175,14 +175,6 @@ export default function Login() {
                 <label htmlFor="password" className="block text-sm font-medium leading-6 text-[#53a9f6]">
                   Senha
                 </label>
-                <div className="text-sm">
-                  <a
-                    href="/senha"
-                    className="font-semibold text-indigo-600 hover:text-[#4e42ac] text-[#53a9f6]"
-                  >
-                    Deseja alterar sua senha?
-                  </a>
-                </div>
               </div>
               <div className="mt-2">
                 <input

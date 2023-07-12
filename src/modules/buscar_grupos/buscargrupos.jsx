@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import mitsuru from '../../assets/mitsuru.png';
+import persona from '../../assets/persona.png';
 
 export default function EncontrarGrupos() {
   const [termoPesquisa, setTermoPesquisa] = useState('');
@@ -55,7 +55,6 @@ export default function EncontrarGrupos() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            // adicione outros dados necessários aqui
           }),
         });
 
@@ -82,7 +81,6 @@ export default function EncontrarGrupos() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            // adicione outros dados necessários aqui
           }),
         });
 
@@ -115,15 +113,15 @@ export default function EncontrarGrupos() {
           <div className="relative mt-16 h-auto lg:mt-1 py-5">
             <img
               className="relative mt-16 h-auto lg:mt-1 flex items-center justify-center"
-              src={mitsuru}
+              src={persona}
               alt="girl"
-              width={700}
+              width={1100}
               height={1500}
             />
           </div>
           <div className="container py-10 content">
             <div>
-              <h2 className="mb-4 text-white text-2xl font-bold">Encontrar Grupos</h2>
+              <h2 className="mb-4 text-white text-2xl font-bold">Encontre grupos</h2>
               <div>
                 <input
                   type="text"
@@ -157,7 +155,7 @@ export default function EncontrarGrupos() {
                         <button
                           type="button"
                           onClick={() => handleJoinGroup(grupo.nome)}
-                          className="px-3 py-1 text-sm font-semibold text-white bg-green-500 rounded-md shadow-sm hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-400"
+                          className="px-3 py-1 text-sm font-semibold text-white bg-[#53a9f6] rounded-md shadow-sm hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-400"
                         >
                           Entrar
                         </button>
@@ -167,7 +165,7 @@ export default function EncontrarGrupos() {
                 </ul>
               ) : (
                 <p style={{ color: 'white' }}>
-                  {termoPesquisa ? 'Nenhum grupo encontrado.' : 'Digite um termo de pesquisa.'}
+                  {termoPesquisa ? 'Nenhum grupo encontrado.' : ''}
                 </p>
               )}
               <button

@@ -10,10 +10,6 @@ start:
 test:
 	npm test
 
-# Verifica a cobertura dos testes
-coverage:
-	jest --coverage
-
 # Executa o ESLint para verificar o padrão de codificação
 lint:
 	npx eslint src

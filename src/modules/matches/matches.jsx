@@ -126,7 +126,7 @@ export default function MatchesForm() {
               className="relative mt-16 h-auto lg:mt-1 flex items-center justify-center"
               src={mitsuru}
               alt="girl"
-              width={700}
+              width={500}
               height={1500}
             />
           </div>
@@ -139,7 +139,7 @@ export default function MatchesForm() {
                 type="text"
                 value={searchTerm}
                 onChange={handleInputChange}
-                placeholder="Pesquisar..."
+                placeholder="Pesquisar pessoas..."
                 className="px-4 py-2 rounded-l-md text-gray-800 focus:outline-none focus:ring focus:ring-blue-400"
               />
               <button

@@ -64,7 +64,7 @@ function Profile() {
               className="relative mt-16 h-auto lg:mt-1 flex items-center justify-center"
               src={cat}
               alt="Boy"
-              width={600}
+              width={500}
               height={1500}
             />
           </div>

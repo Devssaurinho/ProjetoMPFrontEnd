@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import blue from '../../assets/blue.png';
 
 export default function Meus() {
   const [data, setData] = useState(null);
+  const userData = JSON.parse(localStorage.getItem('responseData'));
 
   const getMatchs = async (id) => {
     try {
@@ -18,7 +21,79 @@ export default function Meus() {
     }
   };
 
+  const getIdAmigo = async (nome) => {
+    try {
+      const response = await fetch(`http://localhost:8000/Usuarios/lista-usuario-por-username/${nome}`);
+      if (!response.ok) {
+        throw new Error('Erro ao obter os Matchs');
+      }
+      const flor = await response.json();
+      return flor;
+    } catch (error) {
+      console.error('Erro ao obter os Matchs:', error);
+      throw error;
+    }
+  };
+
+  const handleAddFriend = async (zeta) => {
+    const amizade = await getIdAmigo(zeta);
+    const userId = amizade.id;
+    if (userData) {
+      const updatedUserData = { ...userData };
+      if (updatedUserData.amigos) {
+        if (!updatedUserData.amigos.includes(userId)) {
+          updatedUserData.amigos.push(userId);
+          localStorage.setItem('responseData', JSON.stringify(updatedUserData));
+          toast.success('Amigo adicionado com sucesso!');
+        } else {
+          updatedUserData.amigos = updatedUserData.amigos.filter((amigo) => amigo !== userId);
+          localStorage.setItem('responseData', JSON.stringify(updatedUserData));
+          toast.success('Amigo removido com sucesso!');
+        }
+
+        try {
+          const response = await fetch(`http://localhost:8000/Usuarios/update/${userData.id}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ amigos: updatedUserData.amigos }),
+          });
+          if (!response.ok) {
+            throw new Error('Erro ao atualizar os amigos do usuário');
+          }
+          console.log('Amigos do usuário atualizados com sucesso!');
+        } catch (error) {
+          console.error('Erro ao atualizar os amigos do usuário:', error);
+        }
+      } else {
+        updatedUserData.amigos = [userId];
+        localStorage.setItem('responseData', JSON.stringify(updatedUserData));
+        toast.success('Amigo adicionado com sucesso!');
+
+        try {
+          const response = await fetch(`http://localhost:8000/Usuarios/update/${userData.id}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ amigos: updatedUserData.amigos }),
+          });
+          if (!response.ok) {
+            throw new Error('Erro ao atualizar os amigos do usuário');
+          }
+          console.log('Amigos do usuário atualizados com sucesso!');
+        } catch (error) {
+          console.error('Erro ao atualizar os amigos do usuário:', error);
+        }
+      }
+    } else {
+      console.log('Usuário não encontrado.');
+    }
+  };
+
   useEffect(() => {
+    console.log(handleAddFriend);
     const getStoredId = () => {
       const storedData = localStorage.getItem('responseData');
       if (storedData) {
@@ -31,9 +106,10 @@ export default function Meus() {
     const IdUsuarioBase = getStoredId(); // Retrieve the stored id
     getMatchs(IdUsuarioBase); // Call getMatchs with the id
   }, []);
-  const Adicionou = () => {
-    console.log(getMatchs());
-  };
+  //  const Adicionou = (rtx) => {
+  //  console.log(rtx);
+  //  console.log(handleAddFriend);
+  //  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-800">
@@ -55,22 +131,6 @@ export default function Meus() {
                 <div key={key} className="bg-gray-800 rounded-md p-6 flex flex-col items-center justify-center text-white">
                   <h3 className="text-lg font-semibold mb-4">{key}</h3>
                   <p className="text-sm">{value}</p>
-                  <div className="flex mt-4">
-                    <button
-                      type="button"
-                      className="px-4 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                      onClick={Adicionou}
-                    >
-                      Adicionar
-                    </button>
-                    <button
-                      type="button"
-                      className="ml-2 px-4 py-2 text-sm font-semibold text-gray-900 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                      onClick={Adicionou}
-                    >
-                      Bloquear
-                    </button>
-                  </div>
                 </div>
               ))}
             </div>

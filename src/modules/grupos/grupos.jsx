@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
-const imageUrl = 'https://png.pngtree.com/png-vector/20191009/ourlarge/pngtree-group-icon-png-image_1796653.jpg';
+import blue from '../../assets/blue.png';
 
 export default function Grupos() {
   const [data, setData] = useState(null);
@@ -34,25 +33,30 @@ export default function Grupos() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-800">
-      <div className="w-1/3 flex items-center justify-center relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
-        <ul className="divide-y divide-gray-100">
-          {data !== null && Object.entries(data).map(([key, value]) => (
-            <li className="my-5" key={key}>
-              <div className="flex gap-x-4">
-                <img className="h-12 w-12 flex-none rounded-full bg-gray-50" src={imageUrl} alt="" />
-                <div className="min-w-0 flex-auto">
-                  <p className="text-sm font-semibold leading-6  text-white">{key}</p>
-                  <p className="mt-1 truncate text-xs leading-5  text-white">{value}</p>
+      <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+        <h2 className="py-3 text-center text-lg font-bold text-white">MATCHES</h2>
+        <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
+          <div className="relative mt-16 h-auto lg:mt-1 py-5">
+            <img
+              className="relative mt-16 h-auto lg:mt-1 flex items-center justify-center"
+              src={blue}
+              alt="Boy"
+              width={350}
+              height={1500}
+            />
+          </div>
+          <div className="mt-10 mb-9 flex items-center justify-center lg:justify-start">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {data !== null && Object.entries(data).map(([key, value]) => (
+                <div key={key} className="bg-gray-800 rounded-md p-6 flex flex-col items-center justify-center text-white">
+                  <h3 className="text-lg font-semibold mb-4">{key}</h3>
+                  <p className="text-sm">{value}</p>
                 </div>
-              </div>
-              <div className="hidden sm:flex sm:flex-col sm:items-end">
-                <button type="button" className=" ml-9 px-3 py-1.5 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"> Entrar </button>
-              </div>
-            </li>
-          ))}
-        </ul>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
   );
 }

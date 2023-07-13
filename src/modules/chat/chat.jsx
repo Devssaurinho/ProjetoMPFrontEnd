@@ -62,6 +62,7 @@ function Chat() {
       await axios.post(`http://localhost:8000/ChatPrivado/enviar-mensagem/${userData.id}/${novoAmigo}`, {
         mensagem,
       });
+      window.location.reload();
       // Atualizar as mensagens exibidas
       // Você pode fazer uma nova chamada à API para buscar as mensagens atualizadas ou atualizar o estado localmente
     } catch (error) {

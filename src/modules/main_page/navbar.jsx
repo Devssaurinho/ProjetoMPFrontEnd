@@ -12,10 +12,11 @@ import logo from '../../assets/atlax.png';
  */
 
 const navigation = [
-  { name: 'Meus matches', href: '/meus', current: true },
+  { name: 'Meus matches', href: '/meus', current: false },
+  { name: 'Grupos match', href: '/gruposmatch', current: false },
   { name: 'Usuários disponíveis', href: '/usuarios', current: false },
   { name: 'Grupos disponíveis', href: '/grupos', current: false },
-  { name: 'Chat', href: '/chat', current: true },
+  { name: 'Chat', href: '/chat', current: false },
 ];
 
 /**
